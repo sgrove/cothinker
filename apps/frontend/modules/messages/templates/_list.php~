@@ -1,0 +1,29 @@
+<?php use_helper('Text', 'Date', 'I18N', 'Global') ?>
+
+<?php include_partial('mailNavigation') ?>
+<?php /*
+  <div class="inbox-fields-holder">
+    <div class="header-fields mail-header-fields" id='mail-header-from'><?php if ($folder == 'outbox') { echo ucfirst(__('to')); } else { echo ucwords(__('from')); } ?></div>
+
+    <div class="header-fields mail-header-fields" id='mail-header-subject'><?php echo ucwords(__('subject')) ?></div>
+    <div class="header-fields mail-header-fields" id='mail-header-date'><?php echo ucwords(__('date')) ?></div>
+  </div>
+*/ ?>
+<?php $counter = 1 ?>
+<?php foreach($pager->getResults() as $result): ?>
+<?php $counter += 1 ?>
+<?php $rowCount = $counter % 2 ?>
+  <div class="mail-listing-fields <?php if($result->getReadAt() == null) echo 'mail-new' ?>">
+    <?php echo checkbox_tag('messages[]', '', false, array()) ?>
+    <?php if ($folder == 'outbox') { echo link_to($result->getsfGuardUserRelatedByRecipientId()->getProfile(), 'user/show?uuid='.$result->getsfGuardUserRelatedByRecipientId()->getProfile()->getUuid()); } else { echo link_to($result->getsfGuardUserRelatedBySenderId()->getProfile(), 'user/show?uuid='.$result->getsfGuardUserRelatedBySenderId()->getProfile()->getUuid()); }?>
+    <?php echo link_to($result->getAbbrSubject(70), 'messages/view?message='.$result->getUuid()) ?>
+    <?php echo format_date($result->getCreatedAt(), 'hh:mm').' '.format_date($result->getCreatedAt()) ?>
+  </div>
+<?php endforeach; ?>  
+  <div class="inbox-fields-footer">
+    <div class="mail-footer-fields header-fields three-columns-1" id='n1'><?php echo ucwords(__('messages')) ?> <?php echo $pager->getFirstIndice() ?> to <?php echo $pager->getLastIndice() ?></div>
+    <div class="mail-footer-fields header-fields three-columns-2" id='n2'><?php echo link_to(image_tag('awrarrow',array('class' => 'nav_rarrow')).' Previous '.$pager->getMaxPerPage(), 'user/showUserMailbox?folder='.$folder.'&page='.$pager->getPreviousPage()) ?></div>
+    <div class="mail-footer-fields header-fields three-columns-3" id='n3'><?php echo link_to('Next '.$pager->getMaxPerPage().image_tag('awrarrow',array('class' => 'nav_rarrow')), 'user/showUserMailbox?folder='.$folder.'&page='.$pager->getNextPage()) ?></div>
+  </div>
+</div>
+

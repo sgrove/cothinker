@@ -1,0 +1,22 @@
+addSuccess:
+  has_layout:   off
+  stylesheets:  [cart]
+
+tosSuccess:
+  has_layout: off
+
+all:
+  has_layout:   on
+  stylesheets:  [cart, project_form_1]
+
+sandbox2:
+  has_layout:  off
+
+indexSuccess:
+  metas:
+    title: CoThink - Powering the Service Learning Revolution
+
+sandboxSuccess:
+  javascripts: [seesmic_standalone]
+zebSandboxSuccess:
+  stylesheets: [zeb_style]

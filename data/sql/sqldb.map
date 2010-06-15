@@ -1,0 +1,20 @@
+# Sqlfile -> Database map
+plugins.sfGuardPlugin.lib.model.schema.sql=propel
+plugins.sfPropelActAsCommentableBehaviorPlugin.lib.model.schema.sql=propel
+plugins.sfPropelVersionableBehaviorPlugin.lib.model.schema.sql=propel
+plugins.sfSupportPlugin.lib.model.schema.sql=propel
+plugins.sfErrorLoggerPlugin.lib.model.schema.sql=propel
+plugins.sfPropelActAsTaggableBehaviorPlugin.lib.model.schema.sql=propel
+plugins.sfPropelActAsRecommendableBehaviorPlugin.lib.model.schema.sql=propel
+plugins.sfPropelActAsCountableBehaviorPlugin.lib.model.schema.sql=propel
+plugins.sfPropelApprovableBehaviorPlugin.lib.model.schema.sql=propel
+plugins.sfPhotoGalleryPlugin.lib.model.schema.sql=propel
+plugins.sfPropelPollsPlugin.lib.model.schema.sql=propel
+plugins.sfPropelActAsRatableBehaviorPlugin.lib.model.schema.sql=propel
+lib.model.schema.sql=propel
+plugins.sfEmailTemplatePlugin.lib.model.schema.sql=propel
+plugins.sfPropelActAsStarredBehaviorPlugin.lib.model.schema.sql=propel
+plugins.sfAssetsLibraryPlugin.lib.model.schema.sql=propel
+plugins.sfFaqPlugin.lib.model.schema.sql=propel
+plugins.nahoWikiPlugin.lib.model.schema.sql=propel
+plugins.sfSimpleForumPlugin.lib.model.schema.sql=propel

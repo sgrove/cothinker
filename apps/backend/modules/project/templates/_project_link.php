@@ -1,0 +1,1 @@
+<?php echo link_to($project->getTitle(), 'project/edit?id='.$project->getId()) ?>

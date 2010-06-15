@@ -1,0 +1,5 @@
+sfTicketStatus:
+  opened:
+    name:       Opened
+  closed:
+    name:       Closed

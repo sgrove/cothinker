@@ -1,0 +1,188 @@
+div#inbox
+{
+  padding: 0px;
+}
+
+div#inbox input
+{
+  border: solid 2px blue;
+}
+
+div#mail-nav
+{  
+  font-size: larger;
+  color: blue;
+}
+
+div#mail-nav h1
+{
+  color: black;
+}
+
+div#mail-nav input
+{
+  border: solid 2px blue;
+}
+
+div#mail-header-from
+{
+  width:15%;
+  padding-left: 2px;
+  padding-right: 8px;
+}
+
+div#mail-header-subject
+{
+  width:65.0%;
+  padding-left: 0px;
+}
+
+div#mail-header-date
+{
+  width:18%;
+  padding-left: 6px;
+}
+
+.mail-header-fields
+{
+  background-color:#1D40B2;
+  color: white;
+}
+
+.mail-footer-fields
+{
+  background-color:#1D40B2;
+  color: white;
+}
+
+.mail-footer-fields a
+{
+  background-color:#1D40B2;
+  color: white;
+  text-decoration: none;
+}
+
+.mail-inbox-image
+{
+  border-width: 4px 0px 4px 4px;
+  border-style: solid;
+  border-color: #F7CE26;
+  padding-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+.mail-image
+{
+  padding-top: 4px;
+  border-width: 0px 0px 4px 0px;
+  border-style: solid;
+  border-color: #F7CE26;
+  padding-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+.mail-new
+{
+  font-weight: bold;
+}
+
+div.inbox-fields-holder
+{
+  color: white;
+  font-size: small;
+}
+
+div.inbox-pager-navigation
+{
+  font-size: small;
+  margin-top: 5px;
+}
+
+div.mail-listing-fields
+{
+  font-size: small;
+  height: 15px;
+  padding: 3px 0px 4px 3px;
+  background-color: #E6E6E6;
+  border-bottom: 1px solid gray;
+}
+
+.mail-row-0
+{
+  background-color: #E6EAEE;
+  color: #000062;
+}
+
+.mail-row-1
+{
+  background-color: #fff;
+  color: #000062;
+}
+
+.mail-from
+{
+  width: 15%;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.mail-subject
+{
+ width: 65%;
+ margin-left: 5px;
+ margin-right: 0px;
+}
+
+.mail-date
+{
+ width: 17.5%;
+ margin-left: 5px;
+ margin-right: 0px;
+}
+
+.mail-field-holder
+{
+  padding: 0px 6px 4px;
+  margin-bottom: 4px;
+}
+
+.mail-text-field-holder
+{
+  padding: 10px;
+}
+
+.mail-field-title
+{
+  font-weight: bold;
+}
+
+.message-view-single
+{
+  border: 1px solid gray;
+  padding: 4px;
+  margin-bottom: 5px;
+}
+
+.message-view-single ul, .message-view-single li
+{
+  float: left;
+  margin-right: 4px;
+  line-height: 2em;
+}
+
+.message-view-single img.sender-pic
+{
+  float: left;
+  margin: 0px 4px 4px 0px;
+}
+
+.message-view-single .msg-body
+{
+  clear: left;
+  border-top: 1px solid gray;
+}
+
+.message-view-single input, .message-view-single textarea
+{
+  border: 1px solid gray;
+}

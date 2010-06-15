@@ -1,0 +1,10 @@
+fillin:
+  enabled: true
+
+fields:
+  interest:
+    required:
+      msg:       *Please write about what interested you in the project
+  qualification:
+    required:
+      msg:       *Please tell us why you're qualified for the project

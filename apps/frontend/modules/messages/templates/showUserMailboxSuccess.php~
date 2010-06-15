@@ -1,0 +1,6 @@
+<?php use_helper('Javascript', 'PagerNavigation')?>
+
+<?php include_partial('list', array('pager' => $messages, 'folder' => $folder)) ?>
+<div id="pager-navigation">
+  <?php echo pager_navigation($messages, 'messages/showUserMailbox'.$uri_options, array()) ?>
+</div>

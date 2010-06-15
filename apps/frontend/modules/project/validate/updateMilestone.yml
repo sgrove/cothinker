@@ -1,0 +1,13 @@
+fillin:
+  enabled: true
+
+fields:
+  milestone_title:
+    required:
+      msg:       *Please give the milestone a name. Prefereably something pretty.
+  milestone_deadline:
+    required:
+      msg:       *Please tell us when the milestone is due. We like that kind of info.
+  milestone_description:
+    required: yes
+      msg:      *At least describe the milestone a little bit!

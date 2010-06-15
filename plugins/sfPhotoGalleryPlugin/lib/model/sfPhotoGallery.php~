@@ -1,0 +1,14 @@
+<?php
+
+/**
+ *
+ * @package lib.model
+ */ 
+class sfPhotoGallery extends BasesfPhotoGallery
+{
+  public function getRealName() {
+    return $this->getId().'.'.$this->getSuffix();
+  }
+}
+
+sfPropelBehavior::add('sfPhotoGallery', array('sfPropelUuidBehavior'));

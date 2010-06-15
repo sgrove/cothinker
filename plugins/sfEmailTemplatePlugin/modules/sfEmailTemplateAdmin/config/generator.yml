@@ -1,0 +1,17 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      sfEmailTemplate
+    theme:            default
+
+    list:
+      title: Available Templates
+      display: [ =name, subject ]
+
+    edit:
+      title: Edit Template
+      display: [ name, subject, body, text_body ]
+      actions:
+        _delete: ~
+        _list: ~
+        _save: ~

@@ -1,0 +1,31 @@
+fillin:
+  enabled: true
+
+fields:
+  department_id:
+    required:
+      msg:       *You gotta pick a primary department for you project
+  campus:
+    required:
+      msg:       *You gotta pick a campus, but you could select "any campus" if you're open
+  title:
+    required:
+      msg:      *Give your project a title! Poor lil' thing...
+      min:        10
+      min_error:  *Your title should be longer than that, at least 10 characters
+      max:        150
+      max_error:  *That's a little bit long for a project title. Try a shorter one.
+  description:
+    required: yes
+      msg:      *At least tell us a little bit about your project!
+  begin:
+    required: yes
+      msg:      *When will your project begin?
+  finish:
+    required: yes
+      msg:      *Around what time do you expect the project to be over with?
+  agree:
+    required: yes
+      msg:      *C'mon, our lawyers say it's really important you read and agree to our ToS.
+
+validators:

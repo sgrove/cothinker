@@ -1,0 +1,10 @@
+all:
+  propel:
+    class:          sfPropelDatabase
+    param:
+      phptype:  mysql
+      host:     localhost
+      database: cothink_meerkat
+      username: cothink_runner
+      password: irumul
+      dsn:      mysql://cothink_runner:irumul@localhost/cothink_meerkat

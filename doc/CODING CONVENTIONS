@@ -1,0 +1,68 @@
+DATABASE FIELD VALUES
+----------------------
+FIELD       VALUE       MEANING
+------      ------      -------
+(tblProject)
+status      0           FINISHED
+            1           CANCELLED
+            2           PENDING
+            3           IN PROGRESS
+
+APPLICATIONS0           NO LONGER ACCEPTING APPLICATIONS
+            1           REVIEWING, APPLICATIONS ON HOLD
+            2           ACCEPTING APPLICATIONS
+
+APPSEASON   0           WINTER
+            1           SPRING
+            2           SUMMER
+            3           FALL
+
+HOURS       0           1-3 HOURS/WK
+            1           3-6 HOURS/WK
+            2           6-9 HOURS/WK
+            3           9-12 HOURS/WK
+            4           12+ HOURS/WK
+            5           TO BE NEGOTIATED
+
+COMMITMENT  0           FIRM
+            1           FLEXIBLE
+            2           HIGHLY FLEXIBLE
+
+SCALE       0           SMALL
+            1           MEDIUM
+            2           LARGE
+
+LENGTH      0           YEAR
+            1           SEMESTER
+            2           OTHER
+            
+LOCATION    0           ON CAMPUS
+            1           OFF CAMPUS
+
+PUBLISHED   0           NOT PUBLISHED
+            1           PUBLISHED (Expand to local/global?)
+
+AUPVIOLATION0           NO AUP VIOLATION
+            1           AUP VIOLATED
+
+HELP        0           NO HELP REQUESTED
+            1           HELP REQUESTED
+
+PENDING     0           APPROVAL GRANTED
+            1           APPROVAL PENDING
+
+(tblPendingRequests)
+REQUESTTYPE 0           JOIN PROJECT (OWNER  REQUEST) [Field Order: 1-projectid, 2-position]
+            1           JOIN PROJECT (MEMBER REQUEST) [Field Order: 1-projectid, 2-position]
+
+REQUESTACTN 0           ACCEPT
+            1           DECLINE
+            2           PENDING
+
+REQUESTSTATS0           PROCESSED
+            1           PENDING
+
+(tblMembersProjects)
+MSPRJCTSTS  0           JOINED
+            1           PENDING APPROVAL (OWNER APPROVAL)
+            2           PENDING APPROVAL (MEMBER APPROVAL)

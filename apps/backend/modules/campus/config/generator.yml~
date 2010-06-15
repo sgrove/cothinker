@@ -1,0 +1,8 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Campus
+    theme:            default
+
+    list:
+      display: [name, address, city, state, zip, url, about]

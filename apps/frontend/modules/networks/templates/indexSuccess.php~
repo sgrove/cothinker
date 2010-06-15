@@ -1,0 +1,26 @@
+<?php use_helper('Global') ?>
+<?php $tab = $sf_params->get('tab') ?>
+<?php if (!isset($tab)) $tab = 'main' ?>
+<h1 id="connections"><?php echo __('My Network') ?></h1>
+  <div id="project-tabs">
+    <ul>
+	??
+      <?php nav_tabs('network', $tab) ?>
+    </ul>
+  </div>
+
+<?php foreach($connections as $connection): ?>
+<?php $user = $connection->getOtherUser($sf_user->getId())->getProfile() ?>
+<div class="member-connection">
+  <?php echo image_tag($user->getThumbnail()) ?>
+  <ul>
+    <li><?php echo link_to($user, 'user/show?user='.$user->getUuid()) ?></li>
+    <li><?php echo 'A '.$user->getDepartment().' '.$user->getTitle().' at '.$user->getCampus() ?></li>
+    <li><?php echo link_to(image_tag('sendmessage').' Message', '#') ?><li>
+    <?php if ($connection->isPending() && $connection->isRequested($sf_user->getId())): ?><li><?php echo link_to(image_tag('greenplus').'Accept request', 'networks/acceptConnection?socon='.$connection->getUuid()) ?><br /><?php echo link_to(image_tag('greenminus').'decline request', 'networks/declineConnection?socon='.$connection->getUuid()) ?></li><?php endif; ?>
+    <?php if ($connection->isPending() && $connection->isRequester($sf_user->getId())): ?><li>Waiting for approval</li><?php endif; ?>
+    <?php if (!$connection->isPending()): ?><li><?php echo link_to(image_tag('remove').' Remove friend', 'networks/removeConnection?socon='.$connection->getUuid()) ?></li><?php endif; ?>
+  </ul>
+</div>
+<?php endforeach; ?>
+</table>

@@ -1,0 +1,12 @@
+fillin:
+  enabled: true
+
+fields:
+  length:
+    required:
+      msg:       *Estimate how long the project should take - ask the Cothink community if you are unsure!
+  preferred_term_length:
+    required:
+      msg:       *Please tell us if you have any preference about the student's school term length
+
+validators:

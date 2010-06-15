@@ -1,0 +1,82 @@
+= sfContactGrabberPlugin =
+
+  The 'sfContactGrabberPlugin' will fetch your address book from yahoo and gmail.
+
+
+== Requirements ==
+
+  * PHP 5 with CURL support (curl.so or php_curl.dll)
+
+
+== Installiation instructions ==
+
+  * Install the plugin
+
+  {{{
+    symfony plugin-install http://plugins.symfony-project.com/sfContactGrabberPlugin
+  }}}
+
+  * Enable the sfContactGrabber module in your application settings.yml
+
+  {{{
+    all:
+      .settings:
+        enabled_modules:        [default, sfContactGrabber]
+  }}}
+
+  * Add a writable path for cookies. ( some of the scripts need this, eg: yahoo)
+  So in config/app.yml add the following.
+
+  {{{
+    sfContactGrabberPlugin:
+      cookie_path: somewhere/uploads
+  }}}
+
+  * Clear the cache
+
+  {{{
+    symfony cc
+  }}}
+
+  * Include a link to the form in a view
+
+  {{{
+    <?php include_partial('sfContactGrabber/form');?> 
+  }}}
+
+
+
+
+== Notes ==
+
+  * A level of abstraction is made from the tpl's so they may be eaisly updated in the future as their api's change.
+  Any changes made to them should be listed below.
+
+=== Changes to third party librarys: ===
+
+  * libgmailer:
+    -line 564 ish, commented out the session start, as symfony deals with that.
+    -link 5765 ish, addded 'static' to the function, as is it being called statically. (removes error messages)
+
+== TODO ==
+
+ * Test the myspace library (since it is sitting right there)
+ * Add Hotmail, rediff and orkut support.
+
+== Troubleshooting ==
+
+ * When CURL is not present, you may get errors like: "Warning: dl() [function.dl]: Dynamically loaded extensions aren't enabled in ....." This is simple... go install CURL.
+== License ==
+
+  For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
+
+== Changelog ==
+
+=== 2008-07-20 | 1.1 beta ===
+
+ * Adam Tombleson: Major code re-write. (rekarnar@gmail.com)
+
+=== 2007-07-19 | 1.0 Stable ===
+
+ * Asif.Ali: First version (asifali.mohd@gmail.com)
+   Based from the Contact Grabber library :  http://www.phpclasses.org/browse/package/3895.html

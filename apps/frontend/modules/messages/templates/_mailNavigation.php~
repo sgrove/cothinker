@@ -1,0 +1,18 @@
+<?php use_helper('I18N') ?>
+<div id="mail-nav">
+  <div class="float-right" style="text-align:center;">
+    <?php echo input_tag('message_search') ?><br />
+    Search
+  </div>
+  <h1>Inbox</h1>
+  <?php echo link_to(image_tag('remove').' '.__('Delete Selected'), '#') ?>
+  <?php echo link_to(image_tag('mark').' '.__('Mark Selected'), '#') ?>
+</div>
+<?php /*
+<div id="inbox">
+  <div class="inbox-navigation" style="display:block;">
+    <div class="float-left mail-inbox-image" ><?php echo link_to(ucwords(__("inbox")), 'messages/showUserMailbox', array("alt" => ucwords(__("inbox")))) ?></div>
+    <div class="float-left mail-image"><?php echo link_to(ucwords(__("compose")), 'messages/compose', array("alt" => ucwords(__("compose new message")))) ?></div>
+    <div class="mail-image"><?php echo link_to(ucwords(__('sent')), 'messages/showUserOutbox', array("alt" => ucwords(__("outbox")))) ?></div>
+  </div>
+  */ ?>

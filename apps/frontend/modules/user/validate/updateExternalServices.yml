@@ -1,0 +1,13 @@
+fillin:
+  enabled: true
+
+fields:
+  twitter_username:
+    group:        twitter_group
+    twitterAccountValidator:
+      username: twitter_username
+      twitter_error: This twitter account doesn't seem to work - maybe the password is wrong?
+  twitter_password:
+    group:        twitter_group
+
+validators:

@@ -1,0 +1,8 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Department
+    theme:            default
+
+    list:
+      display: [=name, abbreviation, uuid]

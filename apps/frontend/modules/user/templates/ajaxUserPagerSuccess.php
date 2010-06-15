@@ -1,0 +1,1 @@
+  <?php echo include_partial('user_pager', array('users' => $users, 'uri_options' => $uri_options)); ?>

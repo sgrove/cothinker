@@ -1,0 +1,10 @@
+methods:
+  post: [ subject, message ]
+
+names:
+  subject: 
+    required:     Yes
+    required_msg: Subject is required
+  message: 
+    required:     Yes
+    required_msg: Message body is required

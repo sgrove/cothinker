@@ -1,0 +1,13 @@
+fillin:
+  enabled: true
+
+fields:
+  profit:
+    required:
+      msg: Please tell us if your project will generate any profits.
+
+  liability:
+    required:
+      msg: Please tell us if your project will have any liability concerns
+
+validators:

@@ -1,0 +1,16 @@
+fillin:
+  enabled: true
+
+fields:
+  name:
+    required:
+      msg: Missing task name
+  begin:
+    required:
+      msg: Missing task being
+  finish:
+    required:
+      msg: Missing task end
+  description:
+    required:
+      msg: Missing task descrip.

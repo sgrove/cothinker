@@ -1,0 +1,5 @@
+ajaxAddTodo:
+  has_layout: false
+
+updateExternalServices:
+  has_layout: false

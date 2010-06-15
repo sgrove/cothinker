@@ -1,0 +1,13 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      ProjectUser
+    theme:            default
+
+    list:
+      object_actions:
+        _edit:              ~
+        _delete:            ~
+      title: Project-Position Linkings
+      display: [id, =uuid, sfGuardUser, position_id, positionTitle, projectTitle]
+      filters: [user_id]

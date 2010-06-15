@@ -1,0 +1,22 @@
+fillin:
+  enabled: true
+
+fields:
+  email:
+    sfEmailValidator:
+      strict:       true
+      email_error:  This email address is totally invalid
+  name:
+    required: yes
+      msg:      *At least give us your name!
+  message:
+    required: yes
+      msg:      *You can give us a bit more detail than that! Make your message longer!
+    lengthValidator:
+
+validators:
+  lengthValidator:
+    class: sfStringValidator
+    param:
+      min:       10
+      min_error: *C'mon, your message could be just a bit more detailed!

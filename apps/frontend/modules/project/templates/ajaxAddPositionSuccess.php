@@ -1,0 +1,1 @@
+<?php include_partial('edit_positions', array('project' => $project, 'newPosition' => $newPosition, 'collapsable' => 'true', 'collapsed' => 'false'), array('evalScripts' => true))?>

@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      sfGuardUserProfile
+    theme:            default
+
+    fields:
+      picture:
+        help: Please upload a photo (jpg would be nice)
+        type: admin_input_file_tag
+        upload_dir: photos
+        params: include_link=photos include_remove=true
+    
+    list:
+      title: CoThink Members
+      display: [user_id, =full_name, title, campus, department]
+      filters: [first_name, last_name, title, campus, department]
+    
+    edit:
+      title:  Editing %%first_name%% %%last_name%%'s profile

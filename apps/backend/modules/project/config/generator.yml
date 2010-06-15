@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Project
+    theme:            default
+
+    fields:
+      flagged_help: { name: Needs Help }
+      sfGuardUser:  { name: Owner }
+
+    list:
+      title: CoThink Member Projects
+      display: [=title, sfGuardUserRelatedByOwnerId, department, descriptionBrief, _tags, flagged_help, is_approved]
+      fields:
+        owner_id:           { filter_is_empty: true }
+        sf_guard_user:      { name: Owner, help: This is the person who started/owns the project }
+        description_brief:  { name: Description (Brief) }
+      object_actions:
+        _edit:              ~
+        _delete:            ~
+      filters: [flagged_help, owner_id, department_id, title ]
+
+    edit:
+      title: Editing details for "%%title%%"
+      fields:
+        [tags]

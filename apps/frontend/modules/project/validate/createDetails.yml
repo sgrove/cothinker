@@ -1,0 +1,28 @@
+fillin:
+  enabled: true
+
+fields:
+  department_id:
+    required:
+      msg:       *You gotta pick a primary department for you project
+  campus:
+    required:
+      msg:       *You gotta pick a campus, but you could select "any campus" if you're open
+  title:
+    required:
+      msg:      *Give your project a title! Poor lil' thing...
+      min:        10
+      min_error:  *Your title should be longer than that, at least 10 characters
+      max:        150
+      max_error:  *That's a little bit long for a project title. Try a shorter one.
+  description:
+    required: yes
+      msg:      *At least tell us a little bit about your project!
+  community_benefits:
+    required: yes
+      msg:      *Surely the project must benefit the community somehow!
+  student_reasons:
+    required: yes
+      msg:      *Let us know why this is a good project for students!
+
+validators:

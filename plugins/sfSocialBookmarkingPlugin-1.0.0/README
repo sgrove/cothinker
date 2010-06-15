@@ -1,0 +1,61 @@
+= sfSocialBookmarking plugin =
+
+== Overview ==
+
+The sfSocialBookmarking plugin gives you access to a set of helpers of which everyone generates a linked icon (favicon of the service) to a social bookmarking application (del.icio.us, furl, ...). Clicking on this link will submit the url to the specific service and let you add the url to your account.
+
+== Installation ==
+
+To install sfSocialBookmarkingPlugin:
+
+{{{
+symfony plugin-install symfony/sfSocialBookmarkingPlugin
+}}}
+
+== Usage ==
+
+{{{
+#!php
+
+<?php use_helper('SocialBookmarking') ?>
+ 
+<?php echo link_to_delicious('http://www.foobar.com?foo=bar&bar=123', 'How to do a FooBar'); ?> 
+
+}}}
+
+There are several other helpers available:
+
+ * link_to_delicious - del.icio.us
+ * link_to_technorati - Technorati
+ * link_to_furl - Furl
+ * link_to_yahoo_myweb - Yahoo! My Web
+ * link_to_google_bookmarks - Google Bookmarks
+ * link_to_blinklist - Blinklist
+ * link_to_magnolia - Magnolia
+ * link_to_windows_live - Windows Live
+ * link_to_digg - Digg
+ * link_to_netscape - Netscape 
+ * link_to_stumbleupon - StumpleUpon
+ * link_to_newsvine - Newsvine
+ * link_to_reddit - Reddit
+ * link_to_tailrank - Tailrank
+ * link_to_spurl - Spurl
+ * link_to_yigg - Yigg
+
+If you want to create a link to all of these social bookmarking sites, use this:
+
+{{{
+#!php
+
+<?php use_helper('SocialBookmarking') ?>
+ 
+<?php echo link_to_social_bookmarking('http://www.foobar.com?foo=bar&bar=123', 'How to do a FooBar'); ?>
+
+}}}
+
+'''Note''': If the images doesn't appear copy them into web/images/.
+
+== License ==
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.

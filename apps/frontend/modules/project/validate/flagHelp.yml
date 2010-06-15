@@ -1,0 +1,17 @@
+fillin:
+  enabled: true
+
+fields:
+  regarding:
+    required:
+      msg: Please tell us what are you need help with
+
+  details:
+    required:
+      msg: Please describe in detail what you need help with.
+  
+  party:
+    required:
+      msg: Please let us know if this is a public request for help
+
+validators:

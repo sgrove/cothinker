@@ -1,0 +1,12 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      ProjectPosition
+    theme:            default
+
+    list:
+      object_actions:
+        _edit:              ~
+        _delete:            ~
+      filters: [title, project, user, status]
+      max_per_page: 10

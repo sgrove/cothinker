@@ -1,0 +1,36 @@
+propel:
+  _attributes:        { package: plugins.nahoWikiPlugin.lib.model }
+
+  naho_wiki_wiki:
+    _attributes:      { phpName: nahoWikiWiki }
+    id:               ~
+    uuid:             { type: varchar(36) }
+    title:            { type: varchar(255), unique: true }
+    slug:             { type: varchar(255) }
+    model:            { type: varchar(255) }
+    model_id:         { type: integer }
+    standalone:       { type: boolean }
+    created_at:       ~
+         
+  naho_wiki_page:
+    _attributes:      { phpName: nahoWikiPage }
+    id:               ~
+    uuid:             { type: varchar(36) }
+    wiki_id:          { type: integer, foreignTable: naho_wiki_wiki, foreignReference: id, required: true, onDelete: cascade }
+    name:             { type: varchar, size: 255, index: unique }
+    latest_revision:  { type: integer, required: true, default: 1 }
+
+  naho_wiki_content:
+    _attributes:      { phpName: nahoWikiContent }
+    id:               ~
+    content:          { type: longvarchar } # uncompressed content
+    gz_content:       { type: blob } # compressed content
+
+  naho_wiki_revision:
+    _attributes:      { phpName: nahoWikiRevision }
+    created_at:       ~
+    page_id:          { type: integer, foreignTable: naho_wiki_page, foreignReference: id, required: true, onDelete: cascade, primaryKey: true }
+    revision:         { type: integer, required: true, default: 1, primaryKey: true }
+    user_name:        { type: varchar, size: 255, required: true }
+    comment:          { type: varchar, size: 255 }
+    content_id:       { type: integer, foreignTable: naho_wiki_content, foreignReference: id, required: true, onDelete: cascade, primaryKey: true }

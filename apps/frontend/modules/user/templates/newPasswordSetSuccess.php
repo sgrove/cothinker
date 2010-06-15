@@ -1,0 +1,1 @@
+Your password has been successfully reset. <?php echo link_to('Click here to login.', '@sf_guard_signin') ?>.

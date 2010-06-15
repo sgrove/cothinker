@@ -1,0 +1,21 @@
+propel: 
+
+  _attributes:    { package: plugins.sfEmailTemplatePlugin.lib.model }
+
+  sf_email_template:
+    _attributes:  { phpName: sfEmailTemplate }
+    id:
+    name: 				{ type: varchar(50) }
+    subject: 			{ type: varchar(255) }
+    body:      		{ type: longvarchar }
+    text_body:    { type: longvarchar }
+    created_at: 
+    updated_at: 
+
+  sf_tag_template:
+    _attributes:  { phpName: sfTagTemplate }
+    id:
+    name: 				{ type: varchar(30) }
+    value:      	{ type: varchar(255) }
+    created_at: 
+    updated_at: 

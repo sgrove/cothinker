@@ -1,0 +1,14 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Task
+    theme:            default
+
+    fields:
+      sf_guard_user: { name: Owner }
+
+    list:
+      display: [=project, sfGuardUser, name, slug, begin, finish, status]
+      object_actions: 
+        _edit:        ~
+        _delete:      ~

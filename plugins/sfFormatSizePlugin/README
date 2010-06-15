@@ -1,0 +1,33 @@
+= sfFormatSize plugin =
+
+sfFormatSize provide a helper to transform any value in bytes into something readable like kB, MB, GB, TB...
+ 
+
+== Installation ==
+
+  * Install the plugin
+  
+  {{{
+    $ symfony plugin-install http://plugins.symfony-project.com/sfFormatSizePlugin
+  }}}
+  
+  * Clear your cache
+
+  {{{
+    $symfony cc
+  }}}  
+  
+=== Usage ===
+
+  * Examples
+  {{{
+     <?php echo use_helper('FormatSize') ?>
+     <?php $size_in_bytes = 12312443 ?>
+     <?php echo format_size($size_in_bytes) ?>
+  }}} 
+
+      
+
+=== Versions ===
+
+1.0.0 => First version

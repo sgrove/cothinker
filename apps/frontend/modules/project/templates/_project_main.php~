@@ -1,0 +1,36 @@
+<div class="project-main-header">
+	<?php echo image_tag('nopicture.jpg', array('class' => 'primary')) ?>
+	<h1><?php echo $project->getTitle() ?></h1>
+	<p><?php echo $project->getDescription() ?></p>
+<?php if ($sf_user->isAuthenticated() && $project->isAdmin($sf_user->getProfile()->getUserId())): ?><span><?php echo link_to(__('Edit Details'), 'project/edit?slug='.$project->getSlug()); ?></span> | <span><?php echo link_to(__('Change Picture'), '#'); ?></span><?php endif; ?>
+	<div style="float: left; margin-right: 10px;">
+		Campus:<br />
+                Department:<br />
+		Updated:<br />
+		Status:<br />
+		Tags:<br />
+	</div>
+	<div>
+                <?php echo $project->getCampus() ?><br />
+		<?php echo $project->getDepartment() ?><br />
+		May 10th, 2012 at 6:10am (news)<br />
+		<?php echo format_number_choice(
+      '[0]this project is no longer accepting applications.|[1]this project has received enough applications and is currently reviewing them.|[2]Accepting applications ('.link_to('Apply', '#').')|(2,+Inf]Unknown status code.', '', $project->getApplications()
+      )
+        ?><br />
+        <?php foreach($project->getTags() as $tag): ?>
+          <?php echo link_to($tag, '#') ?> 
+        <?php endforeach; ?>
+	</div>
+        <div style="float: right; right:10px; bottom: 10px;display:inline;">
+          <?php if ($sf_user->isAuthenticated()): ?><span>Favorite <?php echo link_to_star($project, array()) ?></span> |<?php endif; ?> <span>Subscribe <?php echo link_to(image_tag('rss', array('class' =>'rss')), '#') ?></span>
+        </div>
+</div>
+
+<?php include_partial('widget_positions', array('project' => $project)) ?>
+
+<?php include_partial('widget_minifeed', array('project' => $project)) ?>
+
+<div style="clear:both;">
+</div>
+

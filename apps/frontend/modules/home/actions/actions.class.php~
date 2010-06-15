@@ -1,0 +1,94 @@
+<?php
+
+/**
+ * home actions.
+ *
+ * @package    cothink
+ * @subpackage home
+ * @author     Your name here
+ * @version    SVN: $Id: actions.class.php 2692 2006-11-15 21:03:55Z fabien $
+ */
+class homeActions extends sfActions
+{
+  /**
+   * Executes index action
+   *
+   */
+  public function executeIndex()
+  {
+    if ($this->getUser()->isAuthenticated())
+    {
+      $this->redirect('user/show?tab=personal&user='.$this->getUser()->getProfile()->getUuid());
+      return sfView::SUCCESS;
+    }
+    //$this->forward('default', 'module');
+  }
+  
+  public function executeSandbox()
+  {
+    $this->user = sfGuardUserPeer::retrieveByPk(2);
+/*
+	  $departments = CampusPeer::doSelect(new Criteria());
+	  foreach ($departments as $department)
+	  {
+		  	$department->save();
+		  print_r($department->toArray(), true);
+		  echo "test";
+	  }
+  */
+	//$temp_email = $this->sendEmail('messages', 'sendDebugEmail');
+  	//$this->logMessage($temp_email, 'debug');
+  	
+	  //$this->project = ProjectPeer::retrieveBySlug('test_7');  	
+	  /*
+	$this->getUser()->setAttribute('cart', array());
+	$this->products = $this->getProducts();
+        $project = ProjectPeer::doSelect(new Criteria());
+	$this->project = $project[0];*/
+
+  }
+  
+  public function executeFrontpage()
+  {
+    
+  }
+  
+  public function executeLanguageUpdate()
+  {
+    $culture = $this->getRequestParameter('culture', 'en_US');
+    $this->getUser()->setCulture($culture);
+    
+    $referer = $this->getUser()->getAttribute('referer', $this->getRequest()->getReferer());
+    $this->redirect($referer);
+  }
+
+  public function getProducts()
+  {
+	  return array('1', '2', '3', '4');
+  }
+
+  public function executeAddItem()
+  {
+	  $this->id = $this->getRequestParameter('id', 'no-id');
+	  $tmp = split('_', $this->getRequestParameter('id', ''));
+	  $product_id = $tmp[1];
+ 
+	  $cart = $this->getUser()->getAttribute('cart');
+	  if (!isset($cart[$product_id--]))
+	  {
+	    $cart[$product_id--] = 1;
+	  }
+	  else
+	  {
+	    ++$cart[$product_id--];
+	  }
+	  $this->getUser()->setAttribute('cart', $cart);
+	  $this->products = $this->getProducts();
+
+	  $this->id .= '['.$product_id.']';
+  }
+
+  public function executeTos()
+  {
+  }  
+}

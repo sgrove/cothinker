@@ -1,0 +1,139 @@
+= sfPropelActAsStarredBehaviorPlugin =
+
+== Introduction ==
+This behavior allows to star (or bookmark, like Gmail star) Propel objects per user.
+
+== Features ==
+
+ * add/remove star(s) on an object (behaves as a switch button)
+ * multi-models selection
+ * ajax and non ajax support, unobstrusive javascript (use jquery if you do not have it)
+ * helper available link_to_star()
+ * configuration in app.yml 
+
+== Requirements ==
+
+ * starrable objects must have a primary key
+ * user authentication system, by default use sfGuardUser plugin
+
+== Installation ==
+
+ * go to your project's root
+
+ * Install the plugin:
+   {{{
+     ./symfony plugin-install http://plugins.symfony-project.com/sfPropelActAsStarredBehaviorPlugin
+   }}}
+
+ * if not already done, enabled behaviors in config/propel.ini:
+   {{{
+     propel.builder.addBehaviors = true
+   }}}
+
+ * edit the classes that you want to make taggable. For instance, for lib/model/Article.php:
+   {{{
+   #!php
+   <?php
+     class Article extends BaseArticle
+     {
+     }
+
+     sfPropelBehavior::add('Article', array('sfPropelActAsStarredBehavior'));
+   }}}
+
+ * rebuild the model:
+   {{{
+     ./symfony propel-build-all
+   }}}
+
+ * clear cache:
+   {{{
+     ./symfony cc
+   }}}
+
+
+== Usage ==
+
+=== Configuration ===
+This plugin allows you to re-write some of the default configuration options through your app.yml file:
+
+{{{
+#!yaml
+sfPropelActAsStarredBehaviorPlugin:
+  content_type: text
+  content_on:   Star it
+  content_off:  Un-star
+  has_jquery:   true
+}}}
+
+By default the plugin use a similar star like Gmail (white star for unstarred object, yellow star for starred object).
+Available options:
+ * content_type (optional): [text|image] (default 'image'). If you want to use a text instead of an image you have to specify 'text'.
+ * content_on (optional): [your_text_here], to specify the text to show when the object is not starred by the current user.
+ * content_off (optional): [your_text_here], to specify the text to show when the object is already starred by the current user.
+ * image_on (optional): [image_path]. Similar to content_on.
+ * image_off (optional): [image_path]. Similar to content_off.
+ * has_jquery (optional): [true|false] (default 'false'). If you already use jquery you can specify it here, not to use the embedded version in the plugin.
+
+You can also overwrite the default module sfStar inside your application modules folder to make your own template.
+
+=== Starring an object ===
+Consider a Propel "Article" class with the sfPropelActAsStarredBehaviorPlugin applied to it:
+
+{{{
+#!php
+<?php
+$article = new Article();
+[...]
+$article->save();
+$article->setStar();
+}}}
+
+
+=== Un-starring an object ===
+{{{
+#!php
+<?php
+$article = ArticlePeer::retrieveByPk(1);
+$article->clearStar();
+}}}
+
+=== Helper use ===
+{{{
+#!php
+<?php
+echo link_to_star($article,$options);
+?>
+}}}
+
+
+== API ==
+The behavior implement the following methods:
+ * '''setStar()''' - Adds a star to the object for the current user.
+ * '''isStarred()''' - Returns true/false if the object is/is not starred for the current user.
+ * '''countStars()''' - Returns the total number of stars on the object (define the popularity of the object).
+ * '''clearStar()''' - Removes a star from the object for the current user.
+
+ * '''StarPeer::getUserStars($user_id = null,$options = array())''' - 
+ * '''StarPeer::countUserStars($user_id = null,$options = array())''' - 
+ * '''sfPropelActAsStarredBehaviorToolkit::isStarred(model)''' - 
+ * '''sfPropelActAsStarredBehaviorToolkit::retrieveStarredObject(model,model_id)''' - 
+
+
+
+== License and credits ==
+This plugin has been developed by [http://www.estadieu.com/symfony/plugins/ Gerald Estadieu] and is licensed under the MIT license.
+
+
+== To do ==
+
+ * unit tests
+ * allow propel criteria to be added
+ * add more static method to retrieve stars
+ * cookie to allow non-authenticated user to use stars (is it a good idea?)
+
+
+== Changelog ==
+
+=== version 0.1 - 2008-02-18 ===
+Initial public release.

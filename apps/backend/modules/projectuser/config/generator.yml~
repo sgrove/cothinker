@@ -1,0 +1,10 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      ProjectUser
+    theme:            default
+
+    list:
+      title: Project-Position Linkings
+      display: [id, =uuid, sfGuardUser, position_id]
+      filters: [sfGuardUser]

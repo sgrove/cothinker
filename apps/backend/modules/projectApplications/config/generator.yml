@@ -1,0 +1,10 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      PositionApplication
+    theme:            default
+
+    list:
+      object_actions:
+        _edit: ~
+        _delete: ~

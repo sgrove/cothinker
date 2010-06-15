@@ -1,0 +1,708 @@
+propel:
+  _attributes:   { noXsd: false, defaultIdMethod: native, package: lib.model }
+
+  sf_guard_user_profile:
+    _attributes:  { phpName: sfGuardUserProfile, idMethod: native }
+    id:           ~
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    uuid:         { type: varchar(36), required: true }
+    campus_id:    { type: integer, required: true, foreignTable: ct_campus, foreignReference: id }
+    department_id:{ type: integer, required: true, foreignTable: ct_department, foreignReference: id }
+    subdepartment_id:{ type: integer, foreignTable: ct_subdepartment, foreignReference: id }
+    first_name:   { type: varchar(100) }
+    last_name:    { type: varchar(100) }
+    title:        { type: varchar(100) }
+    gender:       { type: integer }
+    about:        { type: longvarchar }
+    primary_email:{ type: varchar(100) }
+    picture:      { type: varchar(255) }
+    rating:       { type: float }
+    rating_count: { type: integer }
+    privacy_level:{ type: integer }
+    private_key:  { type: varchar(36) }
+    karma:        { type: integer }
+    version:      { type: integer }
+    is_approved:  { type: boolean }
+    token:        { type: varchar(255) }
+    updated_at:   { type: timestamp }
+    deleted_at:   { type: timestamp }
+    created_at:  ~
+  
+  ct_external_service:
+    _attributes:  { phpName: ExternalService, idMethod: native }
+    id:           ~
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    uuid:         { type: varchar(36), required: true }
+    twitter_username:   { type: varchar(255) }
+    twitter_password:   { type: varchar(30) }
+    twitter_update:     { type: boolean }
+    twitter_status_update: { type: boolean }
+    twitter_confirmed:  { type: boolean }
+    facebook_account:   { type: varchar(255) }
+    facebook_update:    { type: boolean }
+    facebook_confirmed: { type: boolean }
+
+  ct_user_setting:
+    _attributes:  { phpName: UserSetting, idMethod: native }
+    id:           ~
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    uuid:         { type: varchar(36), required: true }
+    title:        { type: varchar(355) }
+    setting:      { type: longvarchar }
+    description:  { type: longvarchar }
+
+  ct_contactinfo:
+    _attributes:  { phpName: ContactInfo, idMethod: native }
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    uuid:         { type: varchar(36), required: true }
+    title:        { type: varchar(255) }
+    email:        { type: varchar(100) }
+    phone:        { type: varchar(15)  }
+    address1:     { type: varchar(100) }
+    address2:     { type: varchar(100) }
+    city:         { type: varchar(100) }
+    state:        { type: varchar(100) }
+    postal:       { type: varchar(100) }
+    published:    { type: boolean }
+    privacy_level:{ type: integer }
+    deleted_at:   { type: timestamp }
+    version:      { type: integer }
+    updated_at:   { type: timestamp }
+    created_at:   ~
+
+  ct_campus:
+    _attributes:  { phpName: Campus, idMethod: native }
+    id:           { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    uuid:         { type: varchar(36), required: true }
+    name:         { type: varchar(50), required: true }
+    slug:         { type: varchar(255), required: true }
+    address:      { type: varchar(255) }
+    city:         { type: varchar(255) }
+    state:        { type: varchar(2) }
+    zip:          { type: varchar(5) }
+    url:          { type: varchar(255) }
+    phone:        { type: varchar(15) }
+    email:        { type: varchar(50), required: true }
+    about:        { type: longvarchar }
+    version:      { type: integer }
+    deleted_at:   { type: timestamp }
+    created_at:  ~
+
+  ct_department:
+    _attributes:  { phpName: Department, idMethod: native }
+    id:           { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    uuid:         { type: varchar(36), required: true }
+    name:         { type: varchar(50), required: true }
+    abbreviation: { type: varchar(10) }
+    slug:         { type: varchar(255), required: true }
+    version:      { type: integer }
+    deleted_at:   { type: timestamp }
+    created_at:   ~    
+
+  ct_subdepartment:
+    _attributes:  { phpName: Subdepartment, idMethod: native }
+    id:           { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    uuid:         { type: varchar(36), required: true }
+    department_id:{ type: integer, foreignTable: ct_department, foreignReference: id, required: true, onDelete: cascade, autoIncrement: false }
+    name:         { type: varchar(50), required: true }
+    abbreviation: { type: varchar(10) }
+    slug:         { type: varchar(255), required: true }
+    deleted_at:   { type: timestamp }
+    created_at:   ~
+
+  ct_did_you_know:
+    _attributes:  { phpName: DidYouKnow, idMethod: native }
+    id:           { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    uuid:         { type: varchar(36), required: true }
+    title:        { type: varchar(255) }
+    text:         { type: longvarchar }
+    slug:         { type: varchar(255), required: true }
+    version:      { type: integer }
+    deleted_at:   { type: timestamp }
+    created_at:   ~
+
+  ct_project:
+    _attributes:  { phpName: Project, idMethod: native }
+    id:           ~
+    uuid:         { type: varchar(5), required: true }
+    created_by:   { type: integer, foreignTable: sf_guard_user, foreignReference: id }
+    owner_id:     { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade, autoIncrement: false }
+    department_id:{ type: integer, foreignTable: ct_department, foreignReference: id, required: true }
+    campus_id:    { type: integer, foreignTable: ct_campus, foreignReference: id }
+    title:        { type: varchar(255) }
+    picture:      { type: varchar(255) }
+    slug:         { type: varchar(255) }
+    description:  { type: longvarchar }
+    notes:        { type: longvarchar }
+    keywords:     { type: longvarchar }
+    begin:        { type: date }
+    finish:       { type: date }
+    budget:       { type: integer }
+    status:       { type: integer }
+    applications: { type: integer }
+    season:       { type: integer }
+    year:         { type: date }
+    scale:        { type: integer }
+    commitment:   { type: integer }
+    goals:        { type: integer }
+    goals_complete:{ type: integer }
+    hours_weekly: { type: integer }
+    hours_total:  { type: integer }
+    published:    { type: boolean }
+    flagged_aup:  { type: boolean }
+    flagged_help: { type: boolean }
+    main_form:    { type: varchar(255) }
+    is_approved:  { type: boolean }
+    hits:         { type: integer }
+    version:      { type: integer }
+    updated_at:   { type: timestamp }
+    deleted_at:   { type: timestamp }
+    created_at:   ~
+
+  ct_project_application:
+    _attributes:  { phpName: ProjectApplication, idMethod: native }
+    id:           ~
+    uuid:         { type: varchar(5), required: true }
+    created_by:   { type: integer, foreignTable: sf_guard_user, foreignReference: id }
+    owner_id:     { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade, autoIncrement: false }
+    department_id:{ type: integer, foreignTable: ct_department, foreignReference: id, required: true }
+    campus_id:    { type: integer, foreignTable: ct_campus, foreignReference: id }
+    title:        { type: varchar(255) }
+    picture:      { type: varchar(255) }
+    slug:         { type: varchar(255) }
+    description:  { type: longvarchar }
+    notes:        { type: longvarchar }
+    community_benefits:{type: longvarchar }
+    student_reasons:{type: longvarchar }
+    keywords:     { type: longvarchar }
+    begin:        { type: date }
+    finish:       { type: date }
+    budget:       { type: integer }
+    status:       { type: integer }
+    applications: { type: integer }
+    season:       { type: integer }
+    length:       { type: integer }
+    preferred_term_length:{type: integer }
+    year:         { type: date }
+    scale:        { type: integer }
+    commitment:   { type: integer }
+    goals:        { type: integer }
+    goals_complete:{ type: integer }
+    hours_weekly: { type: integer }
+    hours_total:  { type: integer }
+    published:    { type: boolean }
+    flagged_aup:  { type: boolean }
+    flagged_help: { type: boolean }
+    page1_complete:{type: boolean }
+    page2_complete:{type: boolean }
+    page3_complete:{type: boolean }
+    page4_complete:{type: boolean }
+    liability:    { type: boolean }
+    liability_details:{ type: longvarchar }
+    profit:    { type: boolean }
+    profit_details:{type: longvarchar }
+    is_approved:  { type: boolean }
+    points:       { type: integer }
+    approved_by:  { type: varchar(36) }
+    hits:         { type: integer }
+    version:      { type: integer }
+    updated_at:   { type: timestamp }
+    deleted_at:   { type: timestamp }
+    created_at:   ~
+
+  ct_project_setting:
+    _attributes:  { phpName: ProjectSetting, idMethod: native }
+    id:           ~
+    project_id:   { type: integer, foreignTable: ct_project, foreignReference: id, required: true, onDelete: cascade }
+    uuid:         { type: varchar(36), required: true }
+    group:        { type: varchar(255) }
+    title:        { type: varchar(255) }
+    setting:      { type: longvarchar }
+    description:  { type: longvarchar }
+
+  ct_project_form:
+    _attributes:  { phpName: ProjectForm, idMethod: native }
+    id:           ~
+    project_id:   { type: integer, foreignTable: ct_project, foreignReference: id, required: true, onDelete: cascade }
+    uuid:         { type: varchar(36), required: true }
+    title:        { type: varchar(255) }
+    setting:      { type: longvarchar }
+    description:  { type: longvarchar }
+    widget_1:     { type: varchar(255) }
+    wigest_1_setting:{type: longvarchar }
+    widget_2:     { type: varchar(255)}
+    wigest_2_setting:{type: longvarchar }
+    widget_3:     { type: varchar(255) }
+    wigest_3_setting:{type: longvarchar }
+    widget_4:     { type: varchar(255) }
+    wigest_4_setting:{type: longvarchar }
+  
+  ct_user_vote:
+    _attributes:  { phpName: UserVote, idMethod: native }
+    id:           ~
+    uuid:         { type: varchar(36), required: true }
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: false, onDelete: cascade }
+    vote:         { type: integer } 
+    type:         { type: varchar(255), required: true }
+    points:       { type: integer }
+    
+  ct_project_position:
+    _attributes:  { phpName: ProjectPosition, idMethod: native }
+    id:           ~
+    uuid:         { type: varchar(5), required: true }
+    project_id:   { type: integer, foreignTable: ct_project, foreignReference: id, required: true, onDelete: cascade }
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: false, onDelete: cascade }
+    title:        { type: varchar(255), required: true }
+    qualifications:{type: longvarchar, required: true }
+    description:  { type: longvarchar, required: true }
+    deadline:     { type: date }
+    weekly_hours: { type: integer }
+    status:       { type: integer }
+    filled:       { type: boolean }
+    milestone_count:{ type: integer }
+    campus_preference:  { type: integer, foreignTable: ct_campus, foreignReference: id, required: false, onDelete: cascade }
+    updated_at:   { type: timestamp }
+    deleted_at:   { type: timestamp }
+    created_at:   ~
+  
+  ct_position_milestone:
+    _attributes:  { phpName: PositionMilestone, idMethod: native }
+    id:           ~
+    uuid:         { type: varchar(36), required: true }
+    position_id:  { type: integer, foreignTable: ct_project_position, foreignReference: id, required: true, onDelete: cascade }
+    title:        { type: varchar(255), required: true }
+    description:  { type: longvarchar, required: true }
+    deliverables: { type: longvarchar, required: true }
+    deadline:     { type: date }
+    status:       { type: integer }
+    rank:         { type: integer }
+    filled:       { type: boolean }
+    updated_at:   { type: timestamp }
+    deleted_at:   { type: timestamp }
+    created_at:   ~
+    
+  ct_project_user:
+    _attributes:  { phpName: ProjectUser, idMethod: native }
+    id:           ~
+    uuid:         { type: varchar(8), required: true }
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: false, onDelete: cascade }
+    position_id:  { type: integer, foreignTable: ct_project_position, foreignReference: id, required: true, onDelete: cascade }
+    total_hours:  { type: integer }
+    position:     { type: integer }
+    status:       { type: integer }
+    is_approved:  { type: boolean }
+    updated_at:   { type: timestamp }
+    deleted_at:   { type: timestamp }
+    created_at:   ~
+
+  ct_task_user:
+    _attributes:  { phpName: TaskUser, idMethod: native }
+    id:           ~
+    uuid:         { type: varchar(36), required: true }
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    task_id:      { type: integer, foreignTable: ct_task, foreignReference: id, required: true, onDelete: cascade }
+    deleted_at:   { type: timestamp }
+    created_at:   ~
+
+  ct_task:
+    _attributes:  { phpName: Task, idMethod: native }
+    id:           ~
+    uuid:         { type: varchar(6), required: true }
+    project_id:   { type: integer, foreignTable: ct_project, foreignReference: id, required: true, onDelete: cascade }
+    owner_id:     { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    name:         { type: varchar(255) }
+    slug:         { type: varchar(255), required: true }
+    description:  { type: longvarchar }
+    begin:        { type: timestamp }
+    finish:       { type: timestamp }
+    status:       { type: integer }
+    context:      { type: varchar(50) }
+    priority:     { type: integer }
+    privileged:   { type: integer }
+    version:      { type: integer }
+    updated_at:   { type: timestamp }
+    deleted_at:   { type: timestamp }
+    created_at:   ~
+
+  ct_user_todo:
+    _attributes:  { phpName: ToDo, idMethod: native }
+    id:           ~
+    uuid:         { type: varchar(36), required: true }
+    owner_id:     { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    name:         { type: varchar(255) }
+    slug:         { type: varchar(255), required: true }
+    description:  { type: longvarchar }
+    begin:        { type: timestamp }
+    finish:       { type: timestamp }
+    status:       { type: integer }
+    context:      { type: varchar(50), default: "personal" }
+    priority:     { type: integer }
+    privileged:   { type: integer }
+    updated_at:   { type: timestamp }
+    deleted_at:   { type: timestamp }
+    created_at:   ~
+
+  ct_url:
+    _attributes:  { phpName: Url, idMethod: native }
+    id:           ~
+    project_id:   { type: integer, foreignTable: ct_project, foreignReference: id, required: true, onDelete: cascade }
+    uuid:         { type: varchar(36), required: true }
+    url:          { type: varchar(255), required: true }
+    description:  { type: longvarchar }
+    version:      { type: integer }
+    updated_at:   { type: timestamp }
+    deleted_at:   { type: timestamp }
+    created_at:     ~
+
+  ct_message:
+    _attributes:  { phpName: Message, idMethod: native }
+    id:           { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    uuid:         { type: varchar(36), required: true }
+    public_id:    { type: varchar(255), required: true}
+    owner_id:     { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    sender_id:    { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    recipient_id: { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    subject:      { type: longvarchar }
+    body:         { type: longvarchar }
+    html_body:    { type: longvarchar }
+    folder:       { type: varchar(128) }
+    read_at:      { type: timestamp }
+    parent_id:    { type: varchar(36) }
+    message_type: { type: integer }
+    version:      { type: integer }
+    is_hidden:    { type: boolean }
+    deleted_at:   { type: timestamp }
+    created_at:  ~
+
+  ct_history_group:
+    _attributes:  { phpName: HistoryGroup, idMethod: native }
+    id:           { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    uuid:         { type: varchar(36), required: true }
+    name:         { type: varchar(255), required: true}
+    public_title: { type: varchar(255) }
+    version:      { type: integer }
+    deleted_at:   { type: timestamp }
+    created_at:  ~
+
+  ct_history_group_user:
+    _attributes:  { phpName: HistoryGroupUser, idMethod: native }
+    id:           { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    uuid:         { type: varchar(36), required: true }
+    history_group_id:{ type: integer, foreignTable: ct_history_group, foreignReference: id, required: true, onDelete: cascade }
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    version:      { type: integer }
+    deleted_at:   { type: timestamp }
+    created_at:  ~
+
+  ct_history_event:
+    _attributes:  { phpName: HistoryEvent, idMethod: native }
+    id:           { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    uuid:         { type: varchar(36), required: true }
+    history_group_id:{ type: integer, foreignTable: ct_history_group, foreignReference: id, required: true, onDelete: cascade }
+    category:     { type: varchar(255) }
+    title:        { type: varchar(255) }
+    text:         { type: longvarchar }
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade }
+    slug:         { type: varchar(255), required: true }
+    version:      { type: integer }
+    deleted_at:   { type: timestamp }
+    created_at:  ~
+
+  ct_social_connection:
+    _attributes: { phpName: SocialConnection, idMethod: native }
+    id:         ~
+    uuid:       { type: varchar(36), required: true }
+    user1_id:   { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    user2_id:   { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    notes:      { type: longvarchar }
+    status:     { type: integer, required: true }
+    updated_at:   { type: timestamp }
+    deleted_at: { type: timestamp }
+    created_at: ~
+
+  ct_file_gallery:
+    _attributes: { phpName: sfFileGallery, idMethod: native }
+    id:
+    group_id:    varchar(36)
+    uuid:        varchar(16)
+    entity:      varchar(255)
+    entity_id:   integer
+    name:        varchar(255)
+    mime_type:   varchar(255)
+    size:        integer
+    suffix:      varchar(255)
+    title:       varchar(255)
+    description: longvarchar
+    uploaded_by: { type: integer, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade }
+    created_at:  ~
+
+  ct_featured_project:
+    _attributes: { phpName: FeaturedProject, idMethod: native }
+    id:          ~
+    uuid:        varchar(36)
+    project_id:  { type: integer, foreignTable: ct_project, foreignReference: id, required: true, onDelete: cascade }
+    comment:     longvarchar
+    slug:        varchar(255)
+    title:        varchar(255)
+    created_at:  ~
+
+  ct_suggest_feature:
+    _attributes: { phpName: SuggestedFeature, idMethod: native }
+    id:           ~
+    uuid:         varchar(36)
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    title:        longvarchar
+    slug:         { type: varchar(255), required: true }
+    description:  longvarchar
+    status:       integer
+    type:         integer
+    category:     integer
+    feeling:      integer
+    created_at:   ~
+    deleted_at:   { type: timestamp }
+    updated_at:   ~
+  
+  ct_panel_ui:
+    _attributes: { phpName: PanelUI, idMethod: native }
+    id:           ~
+    uuid:         varchar(36)
+    title:        longvarchar
+    description:  longvarchar
+    status:       integer
+    created_at:   ~
+    updated_at:   ~    
+
+  ct_user_setting:
+    _attributes: { phpName: UserSetting, idMethod: native }
+    id:           ~
+    uuid:         varchar(36)
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    title:        longvarchar
+    slug:         { type: varchar(255), required: true }
+    description:  longvarchar
+    status:       integer
+    type:         integer
+    value:        integer
+    created_at:   ~
+    deleted_at:   { type: timestamp }
+    updated_at:   ~
+  
+  ct_cothink_contact:
+    _attributes: { phpName: ContactCothink, idMethod: native }
+    id:           ~
+    uuid:         varchar(36)
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade }
+    email:        varchar(255) 
+    name:         varchar(255)
+    title:        longvarchar
+    slug:         { type: varchar(255), required: true }
+    description:  longvarchar
+    status:       integer
+    type:         integer
+    created_at:   ~
+    deleted_at:   { type: timestamp }
+    updated_at:   ~
+  
+  ct_field:
+    _attributes: { phpName: CoField, idMethod: native }
+    id:           ~
+    uuid:         varchar(36)
+    form_id:     { type: integer, foreignTable: ct_form, foreignReference: id, required: true, onDelete: cascade }
+    name:         varchar(255)
+    slug:         { type: varchar(255), required: true }
+    description:  longvarchar
+    status:       integer
+    type:         integer
+    position:     integer
+    created_at:   ~
+    deleted_at:   { type: timestamp }
+    updated_at:   ~
+
+  ct_form:
+    _attributes: { phpName: CoForm, idMethod: native }
+    id:           ~
+    uuid:         varchar(36)
+    owner_id:     { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    name:         varchar(255)
+    slug:         { type: varchar(255), required: true }
+    description:  longvarchar
+    status:       integer
+    type:         integer
+    created_at:   ~
+    deleted_at:   { type: timestamp }
+    updated_at:   ~
+
+  ct_form_application:
+    _attributes: { phpName: CoFormApplication, idMethod: native }
+    id:           ~
+    uuid:         varchar(36)
+    form_id:      { type: integer, foreignTable: ct_form, foreignReference: id, required: true, onDelete: cascade }
+    position_id:  { type: integer, foreignTable: ct_project_position, foreignReference: id, required: true, onDelete: cascade }
+    name:         varchar(255)
+    slug:         { type: varchar(255), required: true }
+    description:  longvarchar
+    status:       integer
+    type:         integer
+    created_at:   ~
+    deleted_at:   { type: timestamp }
+    updated_at:   ~
+
+  ct_application:
+    _attributes: { phpName: CoApplication, idMethod: native }
+    id:           ~
+    uuid:         varchar(36)
+    application_id:{type: integer, foreignTable: ct_form_application, foreignReference: id, required: true, onDelete: cascade }
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    status:       integer
+    created_at:   ~
+    deleted_at:   { type: timestamp }
+    updated_at:   ~
+
+  ct_application_field_entry:
+    _attributes: { phpName: CoApplicationFieldEntry, idMethod: native }
+    id:           ~
+    uuid:         varchar(36)
+    application_id:{type: integer, foreignTable: ct_application, foreignReference: id, required: true, onDelete: cascade }
+    field_id:      {type: integer, foreignTable: ct_field, foreignReference: id, required: true, onDelete: cascade }
+    value:        longvarchar
+    status:       integer
+    created_at:   ~
+    deleted_at:   { type: timestamp }
+    updated_at:   ~
+
+  ct_position_application:
+    _attributes: { phpName: PositionApplication, idMethod: native }
+    id:           ~
+    uuid:         varchar(36)
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    position_id:  { type: integer, foreignTable: ct_project_position, foreignReference: id, required: true, onDelete: cascade }
+    interest:     longvarchar
+    qualification:longvarchar
+    notes:        longvarchar
+    status:       integer
+    read_at:      { type: timestamp }
+    created_at:   ~
+    deleted_at:   { type: timestamp }
+    updated_at:   ~
+
+  naho_wiki_wiki:
+    _attributes:      { phpName: nahoWikiWiki, idMethod: native }
+    id:               ~
+    uuid:             { type: varchar(36) }
+    title:            { type: varchar(255), unique: true }
+    slug:             { type: varchar(255) }
+    model:            { type: varchar(255) }
+    model_id:         { type: integer }
+    standalone:       { type: boolean }
+    created_at:       ~
+
+  naho_wiki_page:
+    _attributes:      { phpName: nahoWikiPage, idMethod: native }
+    id:               ~
+    uuid:             varchar(36)
+    wiki_id:          { type: integer, foreignTable: naho_wiki_wiki, foreignReference: id, required: true, onDelete: cascade }
+    name:             { type: varchar, size: 255 }
+    latest_revision:  { type: integer, required: true, default: 1 }
+
+  naho_wiki_content:
+    _attributes:      { phpName: nahoWikiContent, idMethod: native }
+    id:               ~
+    content:          { type: longvarchar } # uncompressed content
+    gz_content:       { type: blob } # compressed content
+
+  naho_wiki_revision:
+    _attributes:      { phpName: nahoWikiRevision, idMethod: native }
+    created_at:       ~
+    page_id:          { type: integer, foreignTable: naho_wiki_page, foreignReference: id, required: true, onDelete: cascade, primaryKey: true }
+    revision:         { type: integer, required: true, default: 1, primaryKey: true }
+    user_name:        { type: varchar, size: 255, required: true }
+    comment:          { type: varchar, size: 255 }
+    content_id:       { type: integer, foreignTable: naho_wiki_content, foreignReference: id, required: true, onDelete: cascade, primaryKey: true }
+
+  sf_simple_forum_owner_object:
+    _attributes:  { phpName: sfSimpleForumOwner }
+    id:           ~
+    uuid:             { type: varchar(36) }
+    title:            { type: varchar(255), unique: true }
+    slug:             { type: varchar(255) }
+    model:            { type: varchar(255) }
+    model_id:         { type: integer }
+    standalone:       { type: boolean }
+    created_at:       ~
+
+  sf_simple_forum_category:
+    _attributes:   { phpName: sfSimpleForumCategory }
+    id:           ~
+    owner_id:      { type: integer, foreignTable: sf_simple_forum_owner_object, foreignReference: id, required: true, onDelete: cascade, primaryKey: true }
+    name:          varchar(255)
+    stripped_name: varchar(255)
+    description:   longvarchar
+    rank:          integer
+    created_at:
+
+  sf_simple_forum_topic:
+    _attributes:   { phpName: sfSimpleForumTopic }
+    id:
+    title:         varchar(255)
+    is_sticked:    { type: boolean, default: false }
+    is_locked:     { type: boolean, default: false }
+    forum_id:      { type: integer, foreignTable: sf_simple_forum_forum, foreignReference: id, onDelete: cascade }
+    created_at:
+    updated_at:
+    # performance enhancers
+    latest_post_id: { type: integer, foreignTable: sf_simple_forum_post, foreignReference: id, onDelete: setnull }
+    user_id:       { type: integer, foreignTable: sf_guard_user, foreignReference: id, onDelete: setnull }
+    stripped_title: varchar(255)
+    nb_posts:      { type: bigint, default: 0 }
+    nb_views:      { type: bigint, default: 0 }
+
+  sf_simple_forum_post:
+    _attributes:   { phpName: sfSimpleForumPost }
+    id:
+    title:         varchar(255)
+    content:       longvarchar
+    topic_id:      { type: integer, foreignTable: sf_simple_forum_topic, foreignReference: id, onDelete: cascade }
+    user_id:       { type: integer, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade }
+    created_at:
+    # performance enhancers
+    forum_id:      { type: integer, foreignTable: sf_simple_forum_forum, foreignReference: id, onDelete: cascade }
+    author_name:   varchar(255)
+
+  sf_simple_forum_forum:
+    _attributes:   { phpName: sfSimpleForumForum }
+    id:
+    name:          varchar(255)
+    description:   longvarchar
+    rank:          integer
+    category_id:   { type: integer, foreignTable: sf_simple_forum_category, foreignReference: id, onDelete: cascade }
+    created_at:
+    updated_at:
+    # performance enhancers
+    stripped_name: { type: varchar, size: 255, index: unique }
+    latest_post_id: { type: integer, foreignTable: sf_simple_forum_post, foreignReference: id, onDelete: setnull }
+    nb_posts:      bigint
+    nb_topics:     bigint
+
+
+  sf_simple_forum_topic_view:
+    _attributes:   { phpName: sfSimpleForumTopicView }
+    user_id:       { type: integer, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, primaryKey: true }
+    topic_id:      { type: integer, foreignTable: sf_simple_forum_topic, foreignReference: id, onDelete: cascade, primaryKey: true }
+    created_at:
+
+  ct_contact_message:
+    _attributes:   { phpName: ContactMessage }
+    id:
+    uuid:         varchar(36)
+    name:         varchar(255)
+    email:        varchar(255)
+    message:      longvarchar
+    title:        longvarchar
+    slug:         { type: varchar(255), required: true }
+    status:       integer
+    type:         integer
+    category:     integer
+    feeling:      integer
+    created_at:   ~
+    deleted_at:   { type: timestamp }
+    updated_at:   ~

@@ -1,0 +1,61 @@
+TODO
+----
+1. (12-16-07) Alphanumeric username check
+2. (01-08-08) DO NOT Phase out index.php in favor of individual file, will allow easy redirection
+3. (01-09-08) The project owner should be able to hand off a project to someone if he wants ... so he sends  request to someone and they either accept or decline
+
+COTHINK FEATURE LIST
+--------------------
+0. User Management
+	a. Join, input information. - 12-14-07 (1-4-07 Needs additional validation, but working)
+		i. Manage profile - 1-4-08 (Needs additional validation, but working well)
+	b. search for other members - 1-7-08
+1. Post Project
+	a. Fill out project worksheet - 1-15-8
+        b. Manage members - 1-15-08
+            i. Add - 1-15-08
+            ii. Remove - 1-15-08
+        c. Tasks
+            i. Add
+            ii. Edit
+            iii. Delete
+	d. Request assistance is necessary (4b) and (4c)
+3. Messaging System
+        a. Send messages
+        b. Receive Messages - 1-20-08
+        c. Add project-wide messaging
+        d. Send email upon message receipt
+3. Join Projects
+	a. Search projects based on category, keyword, class/prof approved list
+            i. "All projects" page has 2 check boxes: Interested, Uninterested. Checking one will immedietly put it in your interested/uninterested list and update the table via ajax.
+	b. Detailed history (grade structure?) on each project you've completed, and what you got in return
+	c.
+4. Control Center
+        a. Implement messaging system
+            i. Individual users
+            ii. Project wide
+        b. View pending projects - 1-18-07 (Basis down)
+
+V1.1 Feature list:
+------------------
+1. Community
+	a. Check for similar projects which you may be able to adopt/modify/join
+	b. Ask other community members for assistance
+	c. Expert admins to help you with every step
+2. Advice Column
+        a. Weekly/whenever advice column written in about research related issues.
+
+OTHER POTENTIAL ASPECTS
+-----------------------
+
+1. Competition - Introduce some friendly (local member-vs-member, global school-vs-school) competition feature in order to encourage projects.
+2. Add facebook widget/application
+3. Recruit local members, optionally global members (with permission? Encourage local communities)
+
+MISC DESIGN NOTES
+-----------------
+1. Add fields to the projects table, to allow for flagging("AUP Issue", "Help", "Pending Approval", etc.) (Done - 1-8-08)
+
+maybe you should create a rubric - Each user has a report card with the breakdown,
+with professor comments, etc. All the information will be there when the student
+comes back to the professor for a letter of rec.

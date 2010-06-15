@@ -1,0 +1,127 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="01">
+        <source>About</source>
+        <target>关于</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Blog</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Contact Us</source>
+        <target>联系我们</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Copyright</source>
+        <target>版权</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Help</source>
+        <target>帮助</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Kinda too late now to do anything but succeed...</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Making the world a better place, one project at a time, for people who like better places.</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Privacy Policy</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Sitemap</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>TOS</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>using CoThink's report cards, where members review each other and offer feedback on their experiences</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>via our complete online project-management suite, for free!</source>
+        <target>使用我们的免费在线计划管理</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>with CoThink's vibrant community: Share knowledge and experience. </source>
+        <target>使用我们的交流社区，分享知识和经验</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Collaborate Across Projects</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>Cothink is the place where professors and students come together with community leaders to manage projects for the betterment of the world - or at least GPA's.</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>Let's get started </source>
+        <target>从这里开始</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Manage Projects Online</source>
+        <target>在线管理项目</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>Recruit a stellar team</source>
+        <target>招募一个杰出的团队</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Take a video tour</source>
+        <target>观看小短片</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>home</source>
+        <target>首页</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>login</source>
+        <target>登录</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>logout</source>
+        <target>登出</target>
+      </trans-unit>
+      <trans-unit id="23">
+        <source>members</source>
+        <target>会员</target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>message center</source>
+        <target>信息中心</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>network</source>
+        <target>网络</target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>profile</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>projects</source>
+        <target>计划</target>
+      </trans-unit>
+      <trans-unit id="28">
+        <source>quick suggest</source>
+        <target>建议</target>
+      </trans-unit>
+      <trans-unit id="29">
+        <source>register</source>
+        <target>注册</target>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>suggest a feature</source>
+        <target/>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

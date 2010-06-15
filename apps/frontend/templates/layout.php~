@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<?php include_http_metas() ?>
+<?php include_metas() ?>
+
+<?php include_title() ?>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<?php use_helper('I18N', 'Javascript', 'nifty', 'sfIcon') ?>
+<?php use_helper('Validation', 'I18N') ?>
+
+<body>
+  <?php //$sf_user->refreshCredentials() //NOTE: This adds considerable overhead with the additional SQL queries ?>
+<div id="container">
+  
+  <div id="page-header">
+    <div id="header-menu" style="color: white;">
+    	        <?php if (!$sf_user->isAuthenticated()): ?>
+                <div id="sf_guard_auth_form">
+                  <?php echo form_tag('@sf_guard_signin', array('name' => 'login')) ?>
+                    <fieldset style="border: none;">
+                      <div class="form-row" id="sf_guard_auth_username" style="display:inline;float:left;">
+                        <?php
+                        echo form_error('email'), 
+                        label_for('username', __('Email:')),
+                        input_tag('username', $sf_data->get('sf_params')->get('username'));
+                        ?>
+                      </div>
+                  
+                      <div class="form-row" id="sf_guard_auth_password"  style="display:inline;float:left;">
+                        <?php
+                        echo form_error('password'), 
+                          label_for('password', __('password:')),
+                          input_password_tag('password');
+                        ?>
+                      </div>
+<?php /*
+                      <div class="form-row" id="sf_guard_auth_remember"  style="display:inline;float:left;">
+                        <?php
+                        echo label_for('remember', __('Remember me?')),
+                        checkbox_tag('remember');
+                        ?>
+                      </div>
+*/ ?>
+                        <?php 
+                        echo submit_tag(__('sign in'), array('class' => 'btn'));
+
+//                        link_to(__('Forgot your password?'), '@sf_guard_password', array('id' => 'sf_guard_auth_forgot_password')) 
+                        ?>
+                    </fieldset>
+                  </form>
+                </div>
+              <?php endif; ?>
+
+      <?php //if (!$sf_user->isAuthenticated()) {echo link_to('Sign Up!', 'user/signUp');} ?>
+      <?php if ($sf_user->isAuthenticated()): ?>
+        <?php echo ucwords(__('welcome, %name%', array('%name%' => $sf_user->getProfile()->getFullName()))) ?>
+        <?php echo link_to(ucwords(__("(I'm not %name%)", array('%name%' => $sf_user->getProfile()->getFullName()))), '@sf_guard_signout') ?>
+      <?php endif ?>
+    </div>
+    <div id="page-header-logo" onclick="location.href='<?php echo 'http://'.$this->getContext()->getRequest()->getHost().url_for('@homepage') ?>';" style="cursor: pointer;"> </div>
+  </div>
+
+  <div id="left-menubar">
+    <div id="navlist-holder">
+      <ul id="navbar">
+	<li id=""><?php echo link_to(icon_tag('home')." Home", "home/index") ?></li>
+        <li><?php echo link_to(icon_tag('users').' My Network', 'networks/index') ?></li>
+        <li><?php echo icon_tag('she_users').' '.link_to(ucwords(__('members')), 'user/list') ?></li>
+	<li id=""><?php echo link_to(icon_tag('process')." Projects", "project/list") ?></li>
+        <?php if ($sf_user->isAuthenticated()): ?>
+        <li id=""><?php echo link_to(ucwords(icon_tag('mail').__(' Messages')), 'messages/showUserMailbox?') ?></li>
+        <?php endif ?>
+      </ul>
+    </div>
+    <?php /*
+    <div style="clear:both;">&nbsp;
+			</div>
+	*/ ?>
+    <div class="adframe">
+    <div class="adsense"><div class="adsense-in"><h4>Ads by Google</h4><div class="adunit"><a href="#"><span><strong>Senior C++ Developer Jobs</strong><br/></span><span class="desc">Kernel/GUI Development Works. NYC Financial Firm. Up To $275K T/C<br/></span><span class="url">jobs.pencom.com</span></a></div><div class="adunit"><a href="#"><span><strong>SAP Consulting Jobs</strong><br/></span><span class="desc">IBM Global Business Services Is Hiring Experienced SAP Consultants.<br/></span><span class="url">www.ibm.com/consulting/careers</span></a></div><div class="adunit"><a href="#"><span><strong>PHP Programmers</strong><br/></span><span class="desc">Pre-screened PHP freelancers $15/hr Easy to Hire, Manage, Pay<br/></span><span class="url">www.odesk.com</span></a></div></div></div>
+    </div>
+  </div>
+
+  <div id="content-holder">
+    <?php echo $sf_data->getRaw('sf_content') ?>
+    
+  </div>
+  <?php //echo javascript_tag(nifty_round_elements( "div#content-holder", "all normal" ) ) ?>
+  <?php //echo javascript_tag(nifty_round_elements( "div.adframe", "all normal" ) ) ?>
+  <?php //echo javascript_tag(nifty_round_elements( "div#navlist-holder", "all normal" ) ) ?>
+</div>
+</body>
+</html>

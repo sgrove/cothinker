@@ -1,0 +1,49 @@
+# default values
+all:
+  sf_guard_plugin:
+    remember_key_expiration_age:  2592000
+    remember_cookie_name:         cothinkRememberMe
+
+  sfPropelActAsCountableBehaviorPlugin:
+    count:
+      enabled:  true
+      method:   setHitszer
+
+  sfPropelVersionableBehaviorPlugin:
+      auto_versioning: false
+
+  sfPropelActAsCommentableBehaviorPlugin:
+    use_ajax:         true
+    anonymous:
+      enabled:        true
+      layout:
+        name:         required
+        email:        required
+        title:        optional
+        comment:      required
+      name:           Anonymous User
+    user:
+      enabled:        true
+      layout:
+        title:        optional
+        comment:      required
+      table:          sf_guard_user
+      id:             id
+      class:          sfGuardUser
+      id_method:      getId
+      toString:       __toString
+    namespaces:
+      backend:        administrator
+
+  pager:
+    project_max:    8
+  project_position:
+    status_closed:          0
+    status_open:           1
+  project_user:
+    status_accepted:    1
+  socon:
+    status_pending:     1
+    status_disapproved: 2
+    status_declined:    2
+    status_approved:    3

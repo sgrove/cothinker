@@ -1,0 +1,42 @@
+div.project-widget
+{
+	width: 45%;
+}
+
+div.project-widget-edit
+{
+	width: 35%;
+	border: 1px solid black;
+	margin: 1px;
+}
+
+div.project-widget-edit-active
+{
+  border: 2px dashed black;
+  margin: 0px;
+}
+
+.droppable
+{
+  width:  100px;
+  border: 1px solid green;
+  margin: 5px;
+  padding: 5px;
+}
+
+.droppable p
+{
+  background-color: gray;
+  color: white;
+}
+
+div#project_widget_1
+{
+  float: left;
+}
+
+div#project_widget_2
+{
+  float: right;
+}
+

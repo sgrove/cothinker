@@ -1,0 +1,69 @@
+<?php
+
+class myUser extends sfGuardSecurityUser
+{
+  public function isCurrentUserByEmail($email)
+  {
+    if ($this->isAuthenticated())
+    {
+      if ($email == $this->getProfile()->getEmail())
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  public function isCurrentUserByNickname($nickname)
+  {
+    if ($this->isAuthenticated())
+    {
+      if ($nickname == $this->getProfile()->getNickname())
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  public function getNbNewMessages()
+  {
+    if ($this->isAuthenticated())
+    {
+      return MessagePeer::getNbNewMessages();
+    }
+    return 0;
+  }
+  
+  public function getId()
+  {
+    if ($this->isAuthenticated())
+      return $this->getProfile()->getUserId();
+
+    return false;
+  }
+  
+  public function refreshCredentials()
+  {
+    $user = sfContext::getInstance()->getUser();
+
+    if ($user->isAuthenticated())
+    {
+      $this->setAttribute('user_id', $user->getId(), 'sfGuardSecurityUser');
+      $this->setAuthenticated(true);
+      $this->clearCredentials();
+      $this->addCredentials($user->getAllPermissionNames());
+      
+      $this->clearCredentials();
+      $this->addCredentials($this->getAllPermissionNames());
+      $this->initialize($this->getContext());
+  
+      $myUsername = $this->getUsername();
+  
+      $this->signOut();
+  
+      $user = sfGuardUserPeer::retrieveByUsername($myUsername);
+      sfContext::getInstance()->getUser()->signIn($user);
+    }
+  }
+}

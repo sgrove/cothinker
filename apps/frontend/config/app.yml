@@ -1,0 +1,261 @@
+# default values
+all:
+  sf_guard_plugin:
+    remember_key_expiration_age:  2592000
+    remember_cookie_name:         cothinkRememberMe
+    success_signin_url:           @homepage
+    success_signout_url:          @homepage
+
+  sfAssetsLibrary:
+    upload_dir:               cothink/web/media
+
+  sfPropelActAsCountableBehaviorPlugin:
+    count:
+      enabled:  true
+      method:   setHitszer
+
+  sfPropelVersionableBehaviorPlugin:
+      auto_versioning: false
+
+  sfPropelActAsCommentableBehaviorPlugin:
+    use_ajax:         true
+    anonymous:
+      enabled:        false
+      layout:
+        name:         required
+        email:        required
+        title:        optional
+        comment:      required
+      name:           Anonymous User
+    user:
+      enabled:        true
+      layout:
+        comment:      required
+      table:          sf_guard_user
+      id:             id
+      class:          sfGuardUser
+      id_method:      getId
+      toString:       __toString
+    namespaces:
+      backend:        administrator
+
+  sfContactForm:
+    contact_module:       static           # Module to redirect after the email is sent
+    contact_action:       thankyou            # Action to redirect after the email is sent
+    mail_sent_msg:        Thank you for contacting us!
+    use_cryptographp:     false
+    captcha_intro:        Please insert into the textbox the code you see in the picture below
+    mail_html_header:     |
+      Dear webmaster, there is a new contact message from your website.<br />Here is the content:<br /><br />
+    mail_html_footer:     |
+      <br /><br />Kind regards, the CoThink courier.
+    mail_txt_header:      |
+      Dear webmaster, there is a new contact message from your website.
+      Here is the content:
+    mail_txt_footer:      Kind regards, the CoThink courier.
+    mail_subject:         New contact message on Cothink
+    mail_recipient:       sgrove@cothink.org
+
+  sfFaqPlugin:
+    title:                              CoThink Frequently Asked Questions # default : "FAQ", Title of page
+    first_category_by_default:          true  # default : false, open the first category into load module
+    first_question_by_default:          true  # default : false, open the first question into load category
+    js:                                 true  # default : false, true for the FULL JS version
+    close_all_question_with_category:   false  # default : false, ONLY FOR JS VERSION, close all questions when you reload a category
+
+  site:
+    title_delimiter: " « "
+    title: CoThink
+
+  external:
+    twitter_username: your_twitter_username
+    twitter_password: your_twitter_password
+  tab:
+    project_main:   Summary
+    project_tasks:  Tasks
+    project_team:   Team
+    project_wiki:   Wiki
+    project_forums: Forums
+    project_events: Events
+    project_edit:   Edit
+
+    projects_browse:      Browse
+    projects_my_projects: My Projects
+    projects_favorites:   Favorites
+    projects_create:      Create
+    projects_waiting_pool:Waiting Pool
+    
+    messages_inbox:   Inbox
+    messages_sent:    Sent
+    messages_compose: Compose
+    
+    user_browse:      Search Users
+  user:
+    points_karma_mod:  1.5
+  time_length:
+    less_one_quarter:   1
+    one_quarter:        3
+    one_semester:       5
+    one_year:           7
+    ongoing:            9
+    unknown:            11
+    no_preference:      0
+    quarter:            3
+    semester:           5
+    year:               7
+    ongoing:            9
+  display:
+    event_color_default:      white
+    event_color_general:      blue
+    event_color_features:     dark-green
+    event_color_suggestions:  light-green
+    event_color_bugs:         red
+    event_color_feeds:        yellow
+  pager:
+    project_max:    10
+    user_max:       6
+  project:
+    global_project_id:  999999 
+  project_position:
+    status_closed:      1
+    status_open:        0
+    status_pending:     2
+  project_application:
+    status_unapproved:  0
+    status_approved:    1
+    status_declined:    2
+    status_pending:     3
+    advice_public:      1
+    advice_cothink:     3
+    approval_threshold: 10
+  position_application:
+    status_accepted:    1
+    status_declined:    2
+    status_pending:     3
+    status_marked:      10
+  project_user:
+    status_accepted:    1
+    status_declined:    2
+    status_pending:     3
+  task:
+    status_completed:   1
+    status_open:        0
+    status_upcoming:    2
+    status_overdue:     5
+    status_unknown:     7
+    status_upcoming_days: 3
+    priority_low:       1
+    priority_medium:    2
+    priority_high:      3
+  socon:
+    status_pending:     1
+    status_disapproved: 2
+    status_declined:    2
+    status_approved:    3
+  profile:
+    gender_male:               0
+    gender_female:             1
+    gender_unknown:            2
+    privacy_none:       0
+    privacy_low:        1
+    privacy_medium:     2
+    privacy_high:       3
+    privacy_default:    3
+    null_password:      x45!$fmd-ded_9*2
+  feature:
+    status_closed:      0
+    status_open:        1
+    status_implemented: 2
+    status_fixed:       3
+    type_bug:           0
+    type_feature:       1
+    category_design:    1
+    category_projects:  2    
+    category_inbox:     3
+    category_other:     4
+  karma:
+    join_site_points:       5
+    submit_feature_points:  1
+    vote_feature_points:    1
+    comment_project_application_points: 1
+    submit_project_points:  10
+    join_project_points:    5
+    create_task_points:     1
+    complete_task_points:   5
+    complete_todo_points:   0
+    post_forum_points:      1
+  uuid:
+    project_length:         5
+    file_length:            16
+
+
+  sfSimpleForumPlugin:
+    forum_name: Discussion Boards
+    user_class: sfGuardUserProfile
+    user_retrieve_by_name_method: retrieveByUuid
+    display_categories:      true
+    use_feeds:               false  # requires sfFeed2Plugin
+    count_views:             true  # count each time a topic is viewed. Turn off to increase performance
+    max_per_block:           10    # maximum number of links displayed in a block
+    include_breadcrumb:      true  # include breadcrumb slot content. Turn off if you don't use the breadcrumb.
+    breadcrumb_separator:    ' » ' # separator for breadcrumb trail
+    max_per_page:            10    # maximum threads or messages per page
+    pages_displayed:         5     # maximum pages displayed by the pager navigation
+    feed_max:                10    # maximum messages served by feed
+    show_author_details:     false # display number of messages of post authors
+    allow_new_topic_outside_forum: false
+
+
+  sfswiftmailer:
+    smtp_host: your_smtp_host
+    smtp_user: your_smtp_user
+    smtp_pass: your_smtp_pass
+    
+  cryptographp:
+    width:               130
+    height:              40
+    bg_r:                255               #Background Color RGB
+    bg_g:                255
+    bg_b:                255
+    bg_clear:            true              #transparent background
+    bg_img:                                #put an image in the background PNG, GIF or JPG. Enter the image file
+    bg_frame:            true              #frame the cryptogram
+    char_r:              0                 #font color RGB
+    char_g:              0
+    char_b:              0
+    char_colorrnd:       true
+    char_colorrndlevel:  2                  #0 - 4
+    char_clear:          10                 #0 = opaque; invisible 127
+    fonts:               [luggerbu.ttf]
+    letters_range:       ABCDEFGHKLMNPRTWXYZ234569
+    letters_easyread:    true               #true alternates consonants and vowels
+    letters_rangec:      BCDFGHKLMNPRTVWXZ  #consonants
+    letters_rangev:      AEIOUY             #vowels
+    difuplow:            false
+    char_nb_min:         4                  #minimum number of chars
+    char_nb_max:         4                  #maximum number of chars
+    char_space:          20                 #space between chars
+    char_size_min:       14                 #minimum char size
+    char_size_max:       16                 #maximum char size
+    char_anglemax:       25                 #maximum angle of rotation of chars (0-360) 
+    char_up:             true               #vertical displacement of chars
+    effects_gaussianblur:  false            #transform the image blur, Only if PHP> = 5.0.0 
+    effects_grayscal:    false              #transform the image to grayscale, Only if PHP> = 5.0.0
+    noise_px_min:        10                 #various noise configurations
+    noise_px_max:        10
+    noise_line_min:      1                  #minimum number of lines to add to the cryptogram
+    noise_line_max:      1
+    nb_circle_min:       1                  #minimum number of circles to add to the cryptogram
+    nb_circle_max:       1
+    noise_colorchar:     3
+    brushsize:           1
+    noiseup:             false
+    format:              png
+    secure:              md5
+    usetimer:            0                  #what do the next 4 settings do??
+    usertimererror:      3
+    usemax:              1000
+    oneuse:              false
+
+  sfContactGrabberPlugin:
+    cookie_path: web/uploads/cookies

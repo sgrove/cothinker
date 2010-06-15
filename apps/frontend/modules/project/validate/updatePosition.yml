@@ -1,0 +1,13 @@
+fillin:
+  enabled: true
+
+fields:
+  title:
+    required:
+      msg:       *Give the position a title that would make the student proud
+  description:
+    required:
+      msg:       *Give a fairly detailed description of what this position will be doing on your project
+  qualifications:
+    required:
+      msg:      *How will students know if they're qualified, if you don't tell them?

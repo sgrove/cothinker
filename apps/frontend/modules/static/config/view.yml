@@ -1,0 +1,6 @@
+tosSuccess:
+  has_layout: on
+
+all:
+  has_layout:   on
+

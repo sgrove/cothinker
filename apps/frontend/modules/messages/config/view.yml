@@ -1,0 +1,22 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  stylesheets:    [main, messages]
+
+  javascripts:    []
+
+  has_layout:     on
+  layout:         layout
+
+confirmRegistrationTextSuccess:
+  has_layout: off
+
+confirmRegistrationHtmlSuccess:
+  has_layout: off
+
+forgotPasswordTextSuccess:
+  has_layout: off
+
+forgotPasswordHtmlSuccess:
+  has_layout: off

@@ -1,0 +1,24 @@
+# Non-ajax pages
+showMainSuccess:
+  metas:
+    title: Viewing project details
+
+showTasksSuccess:
+  metas:
+    title: View project tasks
+
+showTaskSuccess:
+  metas:
+    title: View project task
+
+ajaxAddPosition:
+  has_layout: false
+
+ajaxAddTask:
+  has_layout: false
+
+ajaxGenericOutput:
+  has_layout: false
+
+addPositionMilestoneSuccess:
+  has_layout: false

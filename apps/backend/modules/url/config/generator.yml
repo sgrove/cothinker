@@ -1,0 +1,8 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Url
+    theme:            default
+
+    list:
+      display: [project, =url, description]

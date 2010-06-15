@@ -1,0 +1,50 @@
+options:
+  mode: exact
+
+  plugins:
+    - fullscreen
+    - contextmenu
+
+  theme: simple
+
+  theme_settings:
+    theme_simple_toolbar_location: top
+    theme_simple_toolbar_align: left
+    theme_simple_path_location: bottom
+
+    buttons:
+      theme_simple_buttons1:
+        - bold
+        - italic
+        - strikethrough
+        - bullist
+        - numlist
+        - separator
+        - undo
+        - redo
+        - separator
+        - link
+        - unlink
+        - separator
+        - cleanup
+        - removeformat
+        - fullscreen
+
+    extended_valid_elements:
+      img:
+        - class
+        - src
+        - border=0
+        - alt
+        - title
+        - hspace
+        - vspace
+        - width
+        - height
+        - align
+        - onmouseover
+        - onmouseout
+        - name
+
+  relative_urls: false
+  debug: false

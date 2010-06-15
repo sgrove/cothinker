@@ -1,0 +1,21 @@
+fillin:
+  enabled: true
+
+fields:
+  type:
+    required:
+      msg:       *You gotta pick a primary department for you project
+  title:
+    required:
+      msg:      *Give your suggestion or bug report a title
+      min:        10
+      min_error:  *Your title should be longer than that, at least 10 characters
+      max:        150
+      max_error:  *That's a little bit long for a title. Try a shorter one.
+  description:
+    required: yes
+      msg:      *We need a little more detail on the bug or feature, please
+      min:        25
+      min_error:  *Please go into a bit more detail
+
+validators:

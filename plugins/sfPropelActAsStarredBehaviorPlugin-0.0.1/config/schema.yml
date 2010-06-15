@@ -1,0 +1,13 @@
+propel:
+  _attributes:        { package: plugins.sfPropelActAsStarredBehaviorPlugin.lib.model }
+  
+  star:
+    _attributes:      { phpName: Star, package: plugins.sfPropelActAsStarredBehaviorPlugin.lib.model }
+    id:
+    starred_model:    { type: varchar, size: 50, required: true }
+    starred_id:       { type: integer, required: true }
+    user_id:          { type: integer, required: true }
+    _indexes:
+      starred_index:  [starred_model, starred_id]
+      starred_uindex: [starred_model, starred_id, user_id]
+

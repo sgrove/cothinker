@@ -1,0 +1,16 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      sfFaqCategory
+    theme:            default
+
+    list:
+      title:          Categories FAQ List
+      display:        [name, activate]
+      object_actions:
+        _edit:
+        _delete:
+
+    edit:
+      title:          Edition of category "%%name%%"
+      display:        [created_at, name, activate]

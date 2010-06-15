@@ -1,0 +1,8 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      DidYouKnow
+    theme:            default
+
+    list:
+      display: [title, text]

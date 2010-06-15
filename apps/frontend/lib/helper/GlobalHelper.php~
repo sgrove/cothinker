@@ -1,0 +1,210 @@
+<?php
+
+use_helper('Javascript', 'ModalBox', 'Number', 'I18N');
+
+function select_tag_departments($name = 'departments', $selected = 2)
+{
+	$departments = DepartmentPeer::doSelect(new Criteria());
+	return select_tag($name, objects_for_select($departments, 'getUuid', 'getName', $selected, array()), array())
+}
+
+function pager_navigation2($pager, $uri, $navuri)
+{
+  $navigation = '';
+  
+  if ($pager->haveToPaginate())
+  {
+    $uri .= (preg_match('/\?/', $uri) ? '&' : '?').'page=';
+    
+    // First and previous page
+    if ($pager->getPage() != 1)
+    {
+      /*
+      $navigation .= link_to_remote(image_tag('first.gif', 'align=absmiddle'), array(
+        'url'     =>   $uri.'1',
+        'update'  =>  array('success' => 'table_swipers'),
+        'loading' => "Element.show('indicator')",
+        'complete'=> "Element.hide('indicator');".visual_effect('highlight', 'table_swipers')));
+      $navigation .= link_to_remote(image_tag('previous.gif', 'align=absmiddle'), array(
+        'url'     =>  $uri.$pager->getPreviousPage(),
+        'update'  =>  array('success' => 'table_swipers'),
+        'loading' => "Element.show('indicator')",
+        'complete'=> "Element.hide('indicator');".visual_effect('highlight', 'table_swipers')));
+      */
+      $navigation .= link_to(image_tag('first.gif', 'align=absmiddle'), $uri.'1');
+      $navigation .= link_to(image_tag('previous.gif', 'align=absmiddle'), $uri.$pager->getPreviousPage());
+    }
+    else
+    {
+      $navigation .= image_tag('first.gif', 'align=absmiddle');
+      $navigation .= image_tag('previous.gif', 'align=absmiddle');
+    }
+    
+    // Pages one by one
+    $links = array();
+    foreach ($pager->getLinks() as $page)
+    {
+      $links[] = link_to_unless($page == $pager->getPage(), $page, $navuri.$page);
+    }
+    
+    $navigation .= join('&nbsp;&nbsp;', $links);
+    
+    // Next and last page
+    if ($pager->getPage() != $pager->getCurrentMaxLink())
+    {
+      /*
+      $navigation .= '&nbsp;'.link_to_remote(image_tag('next.gif', 'align=absmiddle'), array(
+        'url'     =>  'home/pager?page='.$pager->getNextPage(),
+        'update'  =>  array('success' => 'table_swipers'),
+        'loading' => "Element.show('indicator')",
+        'complete'=> "Element.hide('indicator');".visual_effect('highlight', 'swiper')));
+      $navigation .= link_to_remote(image_tag('last.gif', 'align=absmiddle'), array(
+        'url'     =>  'home/pager?page='.$pager->getLastPage(),
+        'update'  =>  array('success' => 'table_swipers'),
+        'loading' => "Element.show('indicator')",
+        'complete'=> "Element.hide('indicator');".visual_effect('highlight', 'swiper')));
+      */
+      $navigation .= link_to(image_tag('next.gif', 'align=absmiddle'), $uri.$pager->getNextPage());
+      $navigation .= link_to(image_tag('last.gif', 'align=absmiddle'), $uri.$pager->getLastPage());
+    }
+    else
+    {
+      $navigation .= '&nbsp;'.image_tag('next.gif', 'align=absmiddle');
+      $navigation .= image_tag('last.gif', 'align=absmiddle');
+    }
+  }
+
+  return $navigation;
+}
+
+function link_to_feed($name, $uri)
+{
+  return link_to(image_tag('feed.gif', array('alt' => $name, 'title' => $name, 'align' => 'absmiddle')), $uri);
+}
+
+function span_button($text, $uri, $options = array())
+{
+  return link_to('<span class="span-button" style="padding: 1px 3px 1px 3px;">'.$text.'</span>', "$uri", $options);
+}
+
+function m_span_button($text, $uri, $options = array())
+{
+  return m_link_to('<span class="span-button" style="padding: 1px 3px 1px 3px;">'.$text.'</span>', "$uri", $options);
+}
+
+function tags_to_links($tags, $uri='tags/search')
+{
+	$output = '';
+	foreach($tags as $tag)
+	{
+		$output .= link_to($tag, $uri.'?tag='.urlencode($tag)).', ';
+	}
+	
+	return substr($output, 0, strlen($output) - 2);
+}
+
+function select_tag_yes_no($name, $selected = 0)
+{
+	return select_tag($name, options_for_select(array('1' => 'Yes', '0' => 'No'), $selected));
+}
+
+function yes_no($value)
+{
+	if ($value == 0)
+	{
+		return 'no';
+	}
+	elseif ($value == 1)
+	{
+		return 'yes';
+	}
+	else
+	{
+		return 'unknown value';
+	}
+}
+
+function status_text($status)
+{
+  return format_number_choice('[0]Complete|[1]In Progress|[2]Pending/Planning|(2,+Inf]Unknown task status code)', '', $status);
+}
+
+function nav_tabs($section, $current, $object = null)
+{
+  use_helper('sfIcon');
+	if ($section == "profile")
+	{
+		$tabs = array();
+		$tabs[] = array('text' => 'Profile',    'icon' => 'user', 'link' => 'user/show?tab=profile&user='.$object->getUuid());
+		$tabs[] = array('text' => 'Blog',       'icon' => 'word', 'link' => 'user/show?tab=blog&user='.$object->getUuid(), 'class' => 'inactive');
+		$tabs[] = array('text' => 'Projects',   'icon' => 'application', 'link' => 'user/show?tab=projects&user='.$object->getUuid());
+		if (sfContext::getInstance()->getUser()->isAuthenticated() && sfContext::getInstance()->getUser()->getId() == $object->getUserId()) $tabs[] = array('text' => 'Personal', 'link' => 'user/show?tab=personal&user='.$object->getUuid());
+		if (sfContext::getInstance()->getUser()->isAuthenticated() && sfContext::getInstance()->getUser()->getId() == $object->getUserId()) $tabs[] = array('text' => 'Edit', 'link' => 'user/show?tab=edit&user='.$object->getUuid());
+	}
+	
+	if ($section == "project")
+	{
+		$tabs = array();
+		$tabs[] = array('text' => 'Main',     'link' => 'project/show?slug='.$object->getSlug().'&tab=main');
+		$tabs[] = array('text' => 'Progress', 'link' => 'project/show?slug='.$object->getSlug().'&tab=progress');
+		//$tabs[] = array('text' => 'Events',   'link' => '#', 'class' => 'inactive');
+		$tabs[] = array('text' => 'Members',  'link' => 'project/show?slug='.$object->getSlug().'&tab=members');
+		if ($object->isAdmin()) { $tabs[] = array('text' => 'Edit',     'link' => 'project/edit?slug='.$object->getSlug().'&tab=edit', 'authenticated' => 'true'); }
+	}
+
+	if ($section == "projects")
+	{
+		$tabs = array();
+		$tabs[] = array('text' => 'Search',     'link' => 'project/list');
+		$tabs[] = array('text' => 'My Projects','link' => 'project/list?tab=myprojects', 'authenticated' => 'true');
+		$tabs[] = array('text' => 'Favorited', 	'link' => 'project/list?tab=favorited', 'authenticated' => 'true');
+		$tabs[] = array('text' => 'Create', 	'link' => 'project/create?tab=create', 'authenticated' => 'true');
+	}
+	
+        if ($section == "network")
+	{
+		$tabs = array();
+		$tabs[] = array('text' => 'Main',     'link' => 'networks/index?tab=main');
+		$tabs[] = array('text' => 'Pending', 'link' => 'networks/index?tab=pending');
+	}
+
+        if ($section == "members")
+	{
+		$tabs = array();
+		$tabs[] = array('text' => 'Search Members',     'link' => '#');
+		$tabs[] = array('text' => 'Watching', 		'link' => '#');
+	}
+
+	$output = '';
+	foreach ($tabs as $tab)
+	{
+		if (strtoupper(str_replace(' ', '', $tab['text'])) == strtoupper(str_replace(' ', '', $current))) { $tab['class'] = 'current'; } elseif (!isset($tab['class'])) { $tab['class'] = ''; }
+// || (isset($tabs['authenticated'] && sfContext::getInstance()->getUser()->isAuthenticated())))
+		if (!isset($tab['authenticated']) || (isset($tab['authenticated']) && sfContext::getInstance()->getUser()->isAuthenticated()))
+                $output .= "<li class='".$tab['class']."'>".link_to(__($tab['text']), $tab['link'])."</li>";
+	}
+
+	return $output;
+}
+
+function output_panel($options = array())
+{
+  if (is_array($options))
+  {
+    $id = $options['id'];
+    $class = $options['class'];
+    $title = $options['title'];
+    $content = $options['content'];
+
+    $controls = link_to_function('', visual_effect('fade', $id, array('duration' => 0.2)), array('class' => 'panel-controls panel-close'));
+    $controls .= link_to_function('', visual_effect('toggle_blind', $id.'-content', array('duration' => 0.2)), array('class' => 'panel-controls panel-minus'));
+    
+    $output  = "<div id='$id' class='$class'>";
+    $output .= "<div class='panel-titlebar'>$controls<span class='panel-title'>$title</span></div>";
+    $output .= "<p id='$id-content' class='panel-content'>$content</p></div>";
+
+    return $output;
+  }
+
+  return false;
+}

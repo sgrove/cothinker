@@ -1,0 +1,12 @@
+<?php use_helper('I18N') ?>
+
+<div id="home-alpha" class="centered">
+  <?php echo image_tag('alpha') ?> <br />
+  <p class="home-header"><?php echo __("students, we got a deal for you. make some real change through interesting projects, and get a better grade while you're at it.") ?></p>
+</div>
+
+<div id="home-text" class="centered">
+  <?php echo form_tag('@homepage')?>
+    <p class="home-text">Enter your <?php echo input_tag('email','email', array('class' => 'general')).submit_image_tag('button-go', array('class' => 'inline')) ?>and we'll keep you up to date. No spam, we promise.</p>
+  </form>
+</div>

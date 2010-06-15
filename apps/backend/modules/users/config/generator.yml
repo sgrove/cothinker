@@ -1,0 +1,6 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      sfGuardUser
+    theme:            default
+

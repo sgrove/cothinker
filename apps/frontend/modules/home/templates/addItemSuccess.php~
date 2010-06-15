@@ -1,0 +1,1 @@
+<?php include_partial('cart', array('products' => $products)) ?>

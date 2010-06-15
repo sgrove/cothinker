@@ -1,0 +1,17 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Message
+    theme:            default
+
+    fields:
+      sf_guard_user_related_by_owner_id:      { name: Mailbox }
+      sf_guard_user_related_by_sender_id:     { name: Sent By}
+      sf_guard_user_related_by_recipient_id:  { name: To }
+  
+    list:
+      title: CoThink Members
+      display: [sf_guard_user_related_by_owner_id, sf_guard_user_related_by_sender_id, sf_guard_user_related_by_recipient_id, folder, subject, =body]
+      filters: [owner_id, sender_id, folder]
+      object_actions:
+        markAsUnread: { name: Mark message to unread, action: markAsUnread, icon: backend/setImplemented.png }

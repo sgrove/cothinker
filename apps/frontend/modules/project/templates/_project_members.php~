@@ -1,0 +1,34 @@
+<div id="project-positions-search">
+	Search Positions <?php echo image_tag('greenminus', array('style' => 'vertical-align: middle;')) ?>
+	<?php echo form_tag('project/searchPositions') ?>
+	<ul>
+		<li><?php echo label_for('keywords', 'Keywords'), input_tag('keywords') ?></li>
+		<li><?php echo label_for('status', 'Status'), input_tag('keywords') ?></li>
+		<li><?php echo label_for('department', 'Department'), input_tag('keywords') ?></li>
+		<li><?php echo label_for('hours', 'Hours'), input_tag('keywords') ?></li>
+		<li><?php echo submit_tag(__('Search')) ?></li>
+	</ul>
+	</form>
+</div>
+
+<div class="project-positions">
+<h1>Positions</h1>
+
+<?php $counter = 0; ?>
+<?php foreach($project->getPositions() as $position): ?>
+  <div class="project-position">
+          <?php if ($position->isFilled()) { echo image_tag($position->getUser()->getProfile()->getThumbnail(), array('class' => 'primary')); } else { echo image_tag('nopicture.jpg', array('class' => 'primary')); } ?>
+          <h1><?php echo $position->getTitle() ?><?php if (!$position->isFilled()) echo link_to(__('Apply'), '#') ?></h1>
+          <p>
+            <?php echo $position->getQualifications() ?>
+          </p>
+          <p>Filled by: <?php if ($position->isFilled()) { echo $position->getUser()->getProfile(); } else { echo 'Available ('.link_to('Apply', '#').')'; } ?></p>
+          <p>Qualifications: <?php echo $position->getQualifications() ?></p>
+          <p>Hours per week: 6</p>
+          <p><?php echo link_to('More positions like this', '#') ?></p>
+  </div>
+<?php endforeach; ?>
+<?php echo link_to(__("More Positions"), '#', array('class' => 'big-blue-link')) ?>
+</div>
+
+

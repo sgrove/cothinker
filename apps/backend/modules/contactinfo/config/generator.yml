@@ -1,0 +1,8 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      ContactInfo
+    theme:            default
+
+    list:
+      display: [=sfGuardUser, title, email, phone, address1, address2, city, state, postal, published]

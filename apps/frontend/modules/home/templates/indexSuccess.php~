@@ -1,0 +1,125 @@
+<?php use_helper('I18N') ?>
+<?php use_helper('Date', 'Number', 'I18N', 'Form') ?>
+<div class="shcontainer">
+	<?php echo image_tag('shineyheader2.gif') ?>
+	<p>
+		<?php echo __("Cothink is a place where professors and students can come together with their communities to collaborate on projects for the betterment of the world - or at least GPA's.") ?><br />
+	(<?php echo link_to('Take a video tour', '#', 'style="color:orange;font-weight:bold; 	"') ?>)
+	</p>
+</div>
+<div id="cothink-steps">
+	<h1>Let's get started</h1>
+	<div class="cothink-steps" id="step-one">
+		<h2>Search for your project</h2>
+		<p>
+			You can sort projects based on interest, subject, or even class!
+		</p>
+	</div>
+	<div class="cothink-steps" id="step-two">
+		<h2>Make a difference</h2>
+		<p>
+			After a quick application process for the project, join in and use your unique skills to help others.
+		</p>
+	</div>
+	<div class="cothink-steps" id="step-three">
+		<h2>Get a better grade</h2>
+		<p>
+			Use Cothink to auto-notify your professor, or directly print out detailed reports to turn in.
+		</p>
+	</div>
+	<div class="cothink-steps" id="step-four">
+		<h2>Explore Cothink</h2>
+		<p>
+		Cothink offers many innovative features. </p><p style="display:none;">, from permanent storage and free postage for your Letters of Recommendation to auto resume building, even automated migration of history to professional networking sites like LinkedIn.	 <?php echo link_to(__("More Cothink features"), '#') ?> In fact, Cothink has more features than you could shake a stick at. If you could find a stick anywhere nowadays. And assuming you wanted to shake it.
+		</p>
+	</div>
+	<div id="cothink-signup-frontpage">
+		<h1>Join Us</h1>
+		<?php echo form_tag('home/sandbox') ?>
+			<ul>
+			<li>
+				<label for="first_name">First Name</label><?php echo input_tag("first_name") ?><br />
+				<label for="last_name">Last Name</label><?php echo input_tag("last_name") ?>
+			</li>
+			<li>
+				<label for="password">Password</label><?php echo input_password_tag("first_name") ?><br />
+				<label for="confirm">Confirm Password</label><?php echo input_tag("first_name") ?>
+
+			</li>
+			<li>
+				<label for="email">Email</label><?php echo input_tag("first_name") ?><br />
+				<label for="department">Department</label><?php echo input_tag("first_name") ?>
+			</li>
+			</ul>
+			<div style="text-align:center;clear:both;">
+				<?php echo submit_tag('Submit', array('class' => 'btn')) ?>
+			</div>
+		</form>
+	</div>
+</div>
+<div id="cothink-featured">
+	<h1>Featured Project</h1>
+	<h3>Build Humanity's Future!</h3>
+	<div class="featured-project-summary">
+	<?php echo image_tag('nopicture.jpg') ?>
+		<div style="float:left;margin-right:10px;">
+		Owner: 	<br />
+		Dep:	<br />
+		Started:<br />
+		Updated:<br />
+		Status: <br />
+		</div>
+		<div>
+			<?php echo link_to('saveyourworld', '#') ?> (savior)<br />
+			Architecure<br />
+			Jan 2nd, 2011<br />
+			Today<br />
+			Completed<br />
+		</div>
+		
+		<div style="clear:both;"></div>
+	</div>
+	<div class="featured-project-description">
+		<h2>Description</h2>
+		<p>Discovered in 2011, 'Fat Bastard' is nearly upon us, while we have unfortunately stopped accepting aplicaitons for salvation, I would like to wish you all luck. Also, try to avoid becoming some kind of flesh-eating zombies or something while we're locked in the shelter. ther very last thing we want the doors opening to is a...<a href="#">cont.</a>
+		</p>
+		<br />
+		<h2>Project News</h2>
+
+		<div class="news-item-header">
+			<?php echo image_tag('nopicture.jpg') ?>
+			<h3>Site going down</h3>
+			<h4>Anon Admin on Feb 10th, 2016 at 2:30pm</h4>
+		</div>
+
+		<p> Hey everyone....So the site's going to go down, you know impending comet dom and all that. It was really nice knowing you all, well those of you who knew me as more than Anon Admin. You will be missed. Special thanks to <?php echo link_to('drawyourworld', '#') ?> for securing a place for my family and I in one of the comet shelters.<br />Oh, and on the off chance the comet doesn't hit or destroy the earth, see you all in 10 years when the shelter doors open....no sooner, damned time locks.</p>
+<ul id="featured-project-menu">
+	<li><?php echo link_to(__("More Projects"), "#") ?></li>
+	<li><?php echo link_to(__("Apply"), "#") ?></li>
+	<li><?php echo link_to(__("Recommend"), "#") ?></li>
+	<li id="last"><?php echo link_to(__("Subscribe"), '#') ?></li>
+</ul>
+
+	</div>
+</div>
+
+<div>
+	<div style="clear:both;">
+		&nbsp;
+	</div>
+</div>
+
+<?php /*
+<div id="home-alpha" class="centered">
+  <?php echo image_tag('alpha') ?> <br />
+  <p class="home-header"><?php echo ucfirst(__("students, we got a deal for you. Make some real change through interesting projects, and get a better grade while you're at it.")) ?><br /><br />Check back with us later for an invitation to test out the service.</p>
+</div>
+
+<div id="home-text" class="centered">
+  <?php echo form_tag('@homepage')?>
+    <p class="home-text">
+      
+      <?php //echo ucfirst(__("Enter your %email_input% and we'll keep you up to date. No spam, we promise.", array('%email_input%' => input_tag('email','email', array('class' => 'general')).submit_image_tag('button-go', array('class' => 'inline'))))) ?></p>
+  </form>
+  </div>
+ */ ?>

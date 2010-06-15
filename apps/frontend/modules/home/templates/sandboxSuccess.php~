@@ -1,0 +1,368 @@
+<?php use_helper('Date', 'Number', 'I18N', 'Form', 'Javascript', 'Star', 'sfPhotoGallery') ?>
+<?php //if ( photo_has_gallery('entity',$entity->getId() ) ?>
+<?php echo '/'.sfConfig::get('sf_upload_dir_name').'/photos/' ?><br />
+<?php echo $user.':'.photo_link_to_add('User',$user->getId(),array('label' => 'Upload Picture', 'icon' => true, 'modalbox' => true)) ?> <br />
+<?php echo 'thumbnail:'.photo_thumbnail_tag('User',$user->getId()) ?><hr />
+
+
+
+<?php echo photo_lightbox_slideshow('User',$user->getId(),$options=array('icon' => true)) ?>
+<?php $project = ProjectPeer::retrieveBySlug('cothink_next_gen_social_collaboration_platform'); ?>
+[<?php echo $project->getTitle() ?>]
+Creating groups....<br />
+<?php $project->createDefaultGroups() ?>Done!<br />
+Adding you to admin group....
+<?php if ($sf_user->isAuthenticated()) { $project->addUserToGroup($sf_user->getSfGuardUser()); echo 'Done!'; } else { echo "You're not logged in, cannot."; } ?>
+TODO: Find a way to sync the permissions groups found in the fixtures with regenerated uuids when using propel-load-data
+<?php /*
+<h1 style="color: white; background-color: green;">Project Information</h1>
+<div class="project-main-header">
+	<?php echo image_tag('nopicture.jpg', array('class' => 'primary')) ?>
+	<h1>National Campaign for Chemical Warning Reform</h1>
+	<p>It's about time America realized that simply putting warnings on chemicals isn't enough to protect our most valuable resources: our fellow humans. We need to have nation-wide campaigns to educate children on the proper uses of chemicals, to make them more expensive to discourage recreational use, and start a pro-active de-licing campiagn. The last one isn't directly related, per se.</p>
+	<div style="float: left; margin-right: 10px;">
+		Department:<br />
+		Updated:<br />
+		Status:<br />
+		Tags:<br />
+	</div>
+	<div>
+		Chemistry<br />
+		May 10th, 2012 at 6:10am (news)<br />
+		Accepting applications (<?php echo link_to('Apply', '#') ?>)<br />
+		<?php echo link_to('benevolent', '#') ?> <?php echo link_to('caring', '#') ?> <?php echo link_to('bashful', '#') ?>
+	</div>
+        <div style="float: right; right:10px; bottom: 10px;display:inline;">
+          <span>Favorite <?php echo link_to_star($project, array()) ?></span> | <span>Subscribe <?php echo link_to(image_tag('rss', array('class' =>'rss')), '#') ?></span>
+        </div>
+</div>
+
+<div class="news">
+<h1>News</h1>
+		<div class="news-item-header">
+			<?php echo image_tag('nopicture.jpg') ?>
+			<h3>Site going down</h3>
+			<h4>Anon Admin on Feb 10th, 2016 at 2:30pm</h4>
+		</div>
+
+		<p> Hey everyone....So the site's going to go down, you know impending comet dom and all that. It was really nice knowing you all, well those of you who knew me as more than Anon Admin. You will be missed. Special thanks to <?php echo link_to('drawyourworld', '#') ?> for securing a place for my family and I in one of the comet shelters.<br />Oh, and on the off chance the comet doesn't hit or destroy the earth, see you all in 10 years when the shelter doors open....no sooner, damned time locks.</p>
+
+		<div class="news-item-header">
+			<?php echo image_tag('nopicture.jpg') ?>
+			<h3>Site going down</h3>
+			<h4>Anon Admin on Feb 10th, 2016 at 2:30pm</h4>
+		</div>
+
+		<p> Hey everyone....So the site's going to go down, you know impending comet dom and all that. It was really nice knowing you all, well those of you who knew me as more than Anon Admin. You will be missed. Special thanks to <?php echo link_to('drawyourworld', '#') ?> for securing a place for my family and I in one of the comet shelters.<br />Oh, and on the off chance the comet doesn't hit or destroy the earth, see you all in 10 years when the shelter doors open....no sooner, damned time locks.</p>
+<?php echo link_to(__("More news"), '#', array('class' => 'big-blue-link')) ?>
+</div>
+
+<div class="project-mini-update">
+<h1>Recent Activity</h1>
+		<div class="news-item-header">
+			<?php echo image_tag('nopicture.jpg') ?>
+			<h3>Completed Task: Map Sea Monkey Genome</h3>
+			<h4>team_member_1 on Feb 11th, 2016 at 2:30pm</h4>
+		</div>
+
+		<p>Assignment Details: Map the sea monkey genome to determin whether or not it should lose its monkey status.</p>
+		<div class="news-item-header">
+			<?php echo image_tag('nopicture.jpg') ?>
+			<h3>Completed Task: Map Sea Monkey Genome</h3>
+			<h4>team_member_1 on Feb 11th, 2016 at 2:30pm</h4>
+		</div>
+
+		<p>Assignment Details: Map the sea monkey genome to determin whether or not it should lose its monkey status.</p>
+		<div class="news-item-header">
+			<?php echo image_tag('nopicture.jpg') ?>
+			<h3>Completed Task: Map Sea Monkey Genome</h3>
+			<h4>team_member_1 on Feb 11th, 2016 at 2:30pm</h4>
+		</div>
+
+		<p>Assignment Details: Map the sea monkey genome to determin whether or not it should lose its monkey status.</p>
+
+</div>
+<div style="clear:both;">
+</div>
+<?php /*
+<h1>Draggable divs test</h1>
+<div id="shopping_cart">
+ 
+  <h2>Items:</h2>
+ 
+  <div id="product_list">
+    <?php foreach ($products as $id => $title): ?>
+    <div id="<?php echo 'product_'.$title ?>" class="draggable-widgit">
+	<strong>Widgit (<?php echo $title ?>)</strong>
+      <?php echo image_tag('numaro'.$title, array(
+        'class' => 'products'
+	)) ?>
+    </div>
+  <?php echo draggable_element('product_'.$title, array('revert' => true)) ?>
+    <?php endforeach; ?>
+  </div>
+ 
+	<h2>Target:</h2>
+ 
+  <div id="cart" class="cart">
+    <div id="items">
+      <?php include_partial('cart') ?>
+    </div>
+    <div style="clear: both"></div>
+  </div>
+
+<div style="height:20px">
+  <p id="indicator" style="display:none">
+    <?php echo image_tag('indicator.gif') ?> updating cart...
+  </p>
+</div>
+
+
+<?php echo drop_receiving_element('cart', array(
+  'update'     => 'items',
+  'url'        => 'home/addItem',
+  'accept'     => 'products',
+  'script'     => 'true',
+  'hoverclass' => 'cart-active',
+  'loading'    => "Element.show('indicator')",
+  'complete'   => "Element.hide('indicator')"
+)) ?>
+
+
+ 
+</div>
+
+</div>
+
+
+<?php /*
+<div class="shcontainer">
+	<?php echo image_tag('shineyheader2.gif') ?>
+	<p>
+		<?php echo __("Cothink is a place where professors and students can come together with their communities to manage projects for the betterment of the world - or at least GPA's.") ?><br />
+	(<?php echo link_to('Take a video tour', '#', 'style="color:orange;font-weight:bold; 	"') ?>)
+	</p>
+</div>
+<div id="cothink-steps">
+	<h1>Let's get started</h1>
+	<div class="cothink-steps" id="step-one">
+		<h2>Search for your project</h2>
+		<p>
+			You can sort projects based on interest, subject, or even class!
+		</p>
+	</div>
+	<div class="cothink-steps" id="step-two">
+		<h2>Make a difference</h2>
+		<p>
+			After a quick application process for the project, join in and use your unique skills to help others.
+		</p>
+	</div>
+	<div class="cothink-steps" id="step-three">
+		<h2>Get a better grade</h2>
+		<p>
+			Use Cothink to auto-notify your professor, or directly print out detailed reports to turn in.
+		</p>
+	</div>
+	<div class="cothink-steps" id="step-four">
+		<h2>Explore Cothink</h2>
+		<p>
+		Cothink offers many innovative features. </p><p style="display:none;">, from permanent storage and free postage for your Letters of Recommendation to auto resume building, even automated migration of history to professional networking sites like LinkedIn.	 <?php echo link_to(__("More Cothink features"), '#') ?> In fact, Cothink has more features than you could shake a stick at. If you could find a stick anywhere nowadays. And assuming you wanted to shake it.
+		</p>
+	</div>
+	<div id="cothink-signup-frontpage">
+		<h1>Join Us</h1>
+		<?php echo form_tag('home/sandbox') ?>
+			<ul>
+			<li>
+				<label for="first_name">First Name</label><?php echo input_tag("first_name") ?><br />
+				<label for="last_name">Last Name</label><?php echo input_tag("first_name") ?>
+			</li>
+			<li>
+				<label for="password">Password</label><?php echo input_tag("first_name") ?><br />
+				<label for="confirm">Confirm Password</label><?php echo input_tag("first_name") ?>
+
+			</li>
+			<li>
+				<label for="email">Email</label><?php echo input_tag("first_name") ?><br />
+				<label for="department">Department</label><?php echo input_tag("first_name") ?>
+			</li>
+			</ul>
+			<div style="text-align:center;clear:both;">
+				<?php echo submit_tag('Submit', array('class' => 'btn')) ?>
+			</div>
+		</form>
+	</div>
+</div>
+<div id="cothink-featured">
+	<h1>Featured Project</h1>
+	<h3>Build Humanity's Future!</h3>
+	<div class="featured-project-summary">
+	<?php echo image_tag('nopicture.jpg') ?>
+		<div style="float:left;margin-right:10px;">
+		Owner: 	<br />
+		Dep:	<br />
+		Started:<br />
+		Updated:<br />
+		Status: <br />
+		</div>
+		<div>
+			<?php echo link_to('saveyourworld', '#') ?> (savior)<br />
+			Architecure<br />
+			Jan 2nd, 2011<br />
+			Today<br />
+			Completed<br />
+		</div>
+		
+		<div style="clear:both;"></div>
+	</div>
+	<div class="featured-project-description">
+		<h2>Description</h2>
+		<p>Discovered in 2011, 'Fat Bastard' is nearly upon us, while we have unfortunately stopped accepting aplicaitons for salvation, I would like to wish you all luck. Also, try to avoid becoming some kind of flesh-eating zombies or something while we're locked in the shelter. ther very last thing we want the doors opening to is a...<a href="#">cont.</a>
+		</p>
+		<br />
+		<h2>Recent News <?php echo link_to(image_tag('rss'), '#') ?></h2>
+
+		<div class="news-item-header">
+			<?php echo image_tag('nopicture.jpg') ?>
+			<h3>Site going down</h3>
+			<h4>Anon Admin on Feb 10th, 2016 at 2:30pm</h4>
+		</div>
+
+		<p> Hey everyone....So the site's going to go down, you know impending comet dom and all that. It was really nice knowing you all, well those of you who knew me as more than Anon Admin. You will be missed. Special thanks to <?php echo link_to('drawyourworld', '#') ?> for securing a place for my family and I in one of the comet shelters.<br />Oh, and on the off chance the comet doesn't hit or destroy the earth, see you all in 10 years when the shelter doors open....no sooner, damned time locks.</p>
+		<p> Hey everyone....So the site's going to go down, you know impending comet dom and all that. It was really nice knowing you all, well those of you who knew me as more than Anon Admin. You will be missed. Special thanks to <?php echo link_to('drawyourworld', '#') ?> for securing a place for my family and I in one of the comet shelters.<br />Oh, and on the off chance the comet doesn't hit or destroy the earth, see you all in 10 years when the shelter doors open....no sooner, damned time locks.</p>
+	</div>
+</div>
+<div>
+	<div style="clear:both;">
+		&nbsp;
+	</div>
+</div>
+<?php /*
+<div style="background-color:#36499d;color:white;">
+  <div style="background-image:url(/cothink/web/images/shineyheader.gif);height:75px;width:333px;float:left;">test</div>
+  <div>
+        <strong><?php echo __("Cothink is a place where professors and students can come together with their communities to manage projects for the betterment of the world - or at least GPA's.") ?></strong>
+        
+  </div>
+  <div class="clear-both">&nbsp;</div>
+</div>
+ test2
+suggested code: 
+<makk> srgrove, .container {display: inline-block;} .container {overflow: hidden; background: #009;} .container img {float: left;} .container p {margin-left: <widthOfImage>px;}
+<makk> srgrove, .container {display: inline-block;} .container {display: block; overflow: hidden; background: #009;} .container img {float: left;} .container p {margin-left: <widthOfImage>px;}
+ 
+<div class="clear-both">&nbsp;</div>
+ */ ?>
+<?php /*
+Project: <?php echo $project->getTitle() ?>
+
+Project History:
+<ul>
+  <?php foreach ($project->getHistory() as $event): ?>
+    <li><?php echo $event->getTitle().' : '.$event->getText() ?></li>
+  <?php endforeach ?>
+</ul>
+Adding History Event
+<?php
+  $group = $project->getHistoryGroup();
+  $project->addHistoryEvent('Entry #'.($group->countHistoryEvents() + 1).' for project.', 'Just another entry.');
+?>
+<ul>
+  <?php foreach ($project->getHistory() as $event): ?>
+    <li><?php echo $event->getTitle() ?></li>
+  <?php endforeach ?>
+</ul>
+
+Subscribing user:
+<?php $sf_user->getProfile()->subscribeToHistory($project->getHistoryGroup()->getName()) ?> <br />
+
+Your Relevant History:
+<?php $events = $sf_user->getProfile()->getHistory(10); ?>
+<ul>
+  <?php foreach ($events as $event): ?>
+    <li><?php echo $event->getTitle().' : '.$event->getText() ?></li>
+  <?php endforeach ?>
+</ul>
+*/
+?>
+
+<?php /*
+  <div>
+    Your groups and permisions:<br />
+    <?php if ($sf_user->isAuthenticated()): ?>
+      <?php $user = $sf_user; echo $user; ?>:<br />
+      <?php foreach ($user->getGroups() as $group): ?>
+        <?php echo $group->getName() ?>: <?php echo $group->getDescription() ?>
+      <?php endforeach ?>
+      <br />
+      Permissions (<?php echo count($user->getAllPermissions()) ?>):<br />
+      <?php foreach ($user->getAllPermissions() as $permission): ?>
+        <?php echo $permission->getName() ?>: <?php echo $permission->getDescription() ?><br />
+      <?php endforeach ?>  
+    <?php endif; ?>
+  </div>
+  <div class="clear-both">
+<br />
+<h1>Attempting to refresh Credentials...</h1>
+<?php $sf_user->refreshCredentials() ?>
+  <div>
+    Your <strong>new</strong> groups and permisions:<br />
+    <?php if ($sf_user->isAuthenticated()): ?>
+      <?php $user = $sf_user; echo $user; ?>:<br />
+      <?php foreach ($user->getGroups() as $group): ?>
+        <?php echo $group->getName() ?>: <?php echo $group->getDescription() ?>
+      <?php endforeach ?>
+      <br />
+      Permissions (<?php echo count($user->getAllPermissions()) ?>):<br />
+      <?php foreach ($user->getAllPermissions() as $permission): ?>
+        <?php echo $permission->getName() ?>: <?php echo $permission->getDescription() ?><br />
+      <?php endforeach ?>  
+    <?php endif; ?>
+  </div>
+  <div class="clear-both">
+*/ ?>
+<?php /*
+Group:<br />
+<?php echo $group->getName() ?><br />
+<?php echo $group->getDescription() ?><br />
+Group Permissions:<br />
+<?php foreach ($group->getsfGuardGroupPermissions() as $permission): ?>
+  #. <?php echo $permission->getsfGuardPermission()->getName() ?><br />
+<?php endforeach ?>
+<hr>
+Users In Group:<br />
+<?php //$sf_user->addGroupByName('Test group for mass orgy') ?>
+<?php foreach($group->getsfGuardUserGroupsJoinsfGuardUser() as $user): ?>
+  <?php echo ''.$user->getSfGuardUser() ?>:<br />
+  Permissions (<?php echo count($user->getSfGuardUser()->getAllPermissions()) ?>):<br />
+  <?php foreach ($user->getSfGuardUser()->getAllPermissions() as $permission): ?>
+    #. <?php echo $permission->getName() ?><br />
+  <?php endforeach ?>
+<?php endforeach ?>
+*/ ?>
+<?php /*
+Culture: <?php echo $tculture ?><br /><br />
+
+Culture2: <?php echo $sf_user->getCulture() ?><br /><br />
+
+Date: <?php echo format_date(time()) ?><br /><br />
+
+Date Time: <?php echo format_datetime(time()) ?><br /><br />
+ 
+Number: <?php echo format_number(12000.10) ?><br /><br />
+ 
+Currency: <?php echo format_currency(1350, 'USD') ?><br /><br />
+
+Country: <?php echo format_country('US') ?><br /><br />
+ 
+Language: <?php echo format_language('en') ?><br /><br />
+ 
+Date Input: <?php echo input_date_tag('birth_date', mktime(0, 0, 0, 9, 14, 2006)) ?><br /><br />
+
+Country Select: <?php echo select_country_tag('country', 'US') ?><br /><br />
+
+strtotime-1: <?php echo date('m/d/Y', strtotime('4-3-2008')) ?><br /><br />
+strtotime-2: <?php echo date('F d, Y', strtotime('4-3-2008')) ?>
+<hr>
+*/
+?>

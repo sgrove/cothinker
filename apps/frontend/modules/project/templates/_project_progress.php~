@@ -1,0 +1,55 @@
+<?php use_helper('Date', 'I18N', 'Number')?>
+<h3><?php echo ucwords(__('project tasks')) ?></h3>
+<?php echo link_to_function(icon_tag('add').'New Task', visual_effect('toggle_blind', 'task-new-holder', array('duration' => 0.2)), array('class' => '')); ?>
+    <div id="task-new-holder">
+        <?php echo form_remote_tag(array(
+        'update'   => 'tasks-added-holder',
+        'url'      => 'project/ajaxAddTask',
+        )) ?>
+          <div id="task-details" class="float-left" style="vertical-align:top;">
+            <?php echo input_hidden_tag('project', $project->getUuid(), array()) ?>
+            <?php echo input_tag('task_name', 'Task Name')?>
+            <?php echo textarea_tag('task_description', 'Task Description', array('rows' => '3')) ?>
+            <?php echo textarea_tag('task_tags', '', array('rows' => '3')) ?>
+          </div>
+          <div id="task-dates" class="float-right" style="text-align:right;">
+            <label for="task_begin">Task Starts: <?php echo input_date_tag('task_begin', '', array('rich' => 'true')) ?></label><br />
+            <label for="task_finish">Task Due: <?php echo input_date_tag('task_finish', '', array('rich' => 'true')) ?><br />
+            <?php echo submit_tag('Add Task') ?>
+          </div>
+          <div style="height:20px">
+            <p id="indicator" style="display:none">
+              <?php echo image_tag('indicator.gif') ?> adding task...
+            </p>
+          </div>
+        </form>
+    </div>
+<div id="tasks-added-holder">
+</div>
+<table style="width:100%;" style="text-align:left;">
+  <tbody>
+    <tr>
+      <th><?php echo ucwords(__('name'))       ?> </th>
+      <th><?php echo ucwords(__('owner'))      ?> </th>
+      <th><?php echo ucwords(__('begin'))      ?>   - Finish</th>
+      <th><?php echo ucwords(__('assigned to'))?> </th>
+      <th><?php echo ucwords(__('status'))     ?> </th>
+    </tr>
+    <?php if ($project->getTasksJoinOwner() != null): ?>
+      <?php foreach($project->getTasks() as $task): ?>
+      <tr style="border-bottom: 1px solid black;">
+      	<?php if (!$task->isComplete()): ?>
+	        <td><?php echo link_to($task->getName(), 'tasks/show?slug='.$task->getSlug()) ?><br /><?php echo substr($task->getDescription(), 0, 50).'...' ?></td>
+	        <td><?php echo $task->getSfGuardUser()->getProfile() ?></td>
+	        <td><?php echo format_date($task->getBegin()).' - '.format_date($task->getFinish()) ?></td>
+	        <td><?php foreach($task->getUsers() as $user) { echo $user->getSfGuardUser()->getProfile().'<br />'; }  ?></td>
+	        <td><?php echo format_number_choice('[0]Complete|[1]In Progress|[2]Pending/Planning|(2,+Inf]Unknown task status code)', '', $task->getStatus()) ?></td>
+	      <?php else: ?>
+	    		<td colspan="4"><s><?php echo link_to($task->getName(), 'tasks/show?slug='.$task->getSlug()) ?></td>
+	    		<td>complete</td>
+	    	<?php endif; ?>
+      </tr>
+      <?php endforeach; ?>
+    <?php endif; ?>
+  </tbody>
+</table>

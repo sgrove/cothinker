@@ -1,0 +1,16 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      SuggestedFeature
+    theme:            default
+
+    list:
+      display: [id, =slug, description, recommendationScore, typeInWords, sfGuardUser, statusInWords, created_at]
+      object_actions:
+        _delete: ~
+        _edit: ~
+        setImplemented: { name: Set status to implemented, action: setImplemented, icon: backend/setImplemented.png }
+        setClosed:      { name: Set status to closed, action: setClosed, icon: backend/setClosed.png }
+        setFixed:      { name: Set status to fixed, action: setFixed, icon: backend/setFixed.png }
+      filters: [userId, title, description, type, status]
+      max_per_page: 10

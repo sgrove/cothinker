@@ -1,0 +1,5 @@
+voteSuccess:
+  has_layout: false
+
+sitemapSuccess:
+  suffix:     xml

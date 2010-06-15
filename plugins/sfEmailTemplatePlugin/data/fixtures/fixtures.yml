@@ -1,0 +1,5 @@
+sfEmailTemplate:
+  et1:
+    name: REGISTRATION
+    subject: New user
+    body: New user is registered

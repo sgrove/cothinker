@@ -1,0 +1,42 @@
+fillin:
+  enabled: true
+  param:
+    name: signup
+    exclude_types:  [password]
+
+fields:
+  register_email:
+    required:
+      msg:       *You must enter a valid email address
+    sfEmailValidator:
+      strict:       true
+      email_error:  This email address is invalid
+    myCampusEmailValidator:
+      campus_error: Sorry, your campus is not currently registered on our site.
+    userUniqueValidator:
+      user_unique_error: *This email is already registered with us. Did you need to <strong>reset your password</strong>?
+  register_password:
+    required:
+      msg:      *Please enter a password
+    myPasswordValidator:
+  register_password_confirm:
+    required:
+      msg:      *Please retype the password
+    sfCompareValidator:
+      check:    register_password
+      compare_error: *The two passwords do not match
+  first_name:
+    required: yes
+      msg:      *At least give us your name!
+  last_name:
+    required: yes
+      msg:      *Please let us know your last name.
+
+validators:
+  myPasswordValidator:
+    class: sfStringValidator
+    param:
+      min:       6
+      min_error: *Password must be at least 6-16 characters long
+      max:       16
+      max_error: *Password should be 6-16 characters long

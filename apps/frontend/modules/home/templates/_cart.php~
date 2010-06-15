@@ -1,0 +1,20 @@
+<?php foreach ($sf_user->getAttribute('cart') as $product_id => $quantity): ?>
+<div>
+  <?php for ($i = 1; $i <= $quantity; $i++): ?>
+    <?php echo image_tag('numaro'.($product_id+1), array(
+      'class' => 'cart-items',
+      'id'    => 'item_'.$product_id.'_'.$i,
+      'style' => 'position:relative'
+    )) ?>
+  <?php endfor; ?>
+(<?php echo $quantity ?> <?php echo $products[$product_id] ?>) (ID: <?php echo $id.':'.$product_id ?> )
+</div>
+<?php endforeach; ?>
+
+<?php if (!$sf_user->getAttribute('cart')): ?>
+  nothing yet in your shopping cart.
+  <?php else: ?> 
+<?php //echo print_r($products) ?><br />
+<?php //echo print_r($sf_user->getAttribute('cart')) ?>
+<?php endif; ?>
+

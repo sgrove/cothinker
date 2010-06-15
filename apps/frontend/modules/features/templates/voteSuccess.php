@@ -1,0 +1,1 @@
+<?php include_partial('features/feature_votes', array('feature' => $feature)) ?>

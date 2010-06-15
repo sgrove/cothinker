@@ -1,0 +1,15 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      ProjectApplication
+    theme:            default
+
+    list:
+      display: [id, =title, description, page1Complete, page2Complete, page3Complete, page4Complete, liability, profit, statusInWords]
+      object_actions:
+        _delete: ~
+        _edit: ~
+        setApproved: { name: Approve project, action: setApproved, icon: backend/setImplemented.png }
+        setDeclined: { name: Decline project, action: setDeclined, icon: backend/setClosed.png }
+      filters: [title, status, liability, profit]
+      max_per_page: 10

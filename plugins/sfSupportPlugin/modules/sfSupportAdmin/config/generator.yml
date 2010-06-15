@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      sfTicket
+    theme:            default
+
+    list:
+      title:          Tickets
+      sort:						[ updated_at, asc ]
+      layout:         tabular
+      display:        [ =creator, ticket_status, replies_cnt, subject, updated_at ]
+      filters:        [ sf_ticket_status_id, user_id ]
+      object_actions:
+        _reply:       -
+        _delete:			-
+
+    edit:
+      actions: {}
+      actions:
+        _save:   ~
+        _list:   ~
+        _delete: ~

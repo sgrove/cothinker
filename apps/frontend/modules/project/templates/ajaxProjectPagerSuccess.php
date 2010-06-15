@@ -1,0 +1,1 @@
+  <?php echo include_partial('project_pager', array('projects' => $projects, 'uri_options' => $uri_options)); ?>

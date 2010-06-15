@@ -1,0 +1,26 @@
+propel: 
+
+  _attributes:    { package: plugins.sfSupportPlugin.lib.model }
+  sf_ticket:
+    _attributes: { phpName: sfTicket }
+    id:
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id }
+    sf_ticket_status_id:
+    subject:      { type: varchar(255) }
+    message:      { type: longvarchar }
+    created_at: 
+    updated_at: 
+
+  sf_ticket_thread:
+    _attributes: { phpName: sfTicketThread }
+    id:
+    sf_ticket_id: 
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id }
+    message:      { type: longvarchar }
+    created_at: 
+
+  sf_ticket_status:
+    _attributes: 	{ phpName: sfTicketStatus }
+    id:
+    name:      	 	{ type: varchar(20) }
+    created_at:

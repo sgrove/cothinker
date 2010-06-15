@@ -1,0 +1,44 @@
+# default values
+all:
+  sfPropelActAsCommentableBehaviorPlugin:
+    use_ajax:         true
+    css:              true
+    anonymous:
+      enabled:        true
+      layout:
+        name:         required
+        email:        required
+        title:        optional
+        comment:      required
+      name:           Anonymous User
+    user:
+      enabled:        true
+      layout:
+        title:        optional
+        comment:      required
+      table:          sf_guard_user
+      id:             id
+      class:          sfGuardUser
+      id_method:      getId
+      toString:       __toString
+    namespaces:
+      backend:        administrator
+  feature:
+    status_closed:      0
+    status_open:        1
+    status_implemented: 2
+    status_fixed:       3s
+    type_bug:           0
+    type_feature:       1
+  
+  sfAssetsLibrary:
+    upload_dir:               cothink/web/media
+
+  project_application:
+    status_unapproved:  0
+    status_approved:    1
+    status_declined:    2
+    status_pending:     3
+    advice_public:      1
+    advice_cothink:     3
+    approval_threshold: 10

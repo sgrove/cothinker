@@ -1,0 +1,7 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      TaskUser
+    theme:            default
+
+    fields: [task_id, user_id]

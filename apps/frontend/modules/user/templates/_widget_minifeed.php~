@@ -1,0 +1,12 @@
+<div class="project-mini-update">
+<h1>Recent Activity</h1>
+		<?php foreach($profile->getHistory() as $event): ?>
+		<div class="news-item-header">
+			<?php echo image_tag('nopicture.jpg') ?>
+			<h3><?php echo $event->getTitle() ?></h3>
+			<h4>team_member_1 on <?php echo format_datetime($event->getCreatedAt()) ?></h4>
+		</div>
+
+		<p><?php echo $event->getText() ?></p>
+		<?php endforeach; ?>
+</div>

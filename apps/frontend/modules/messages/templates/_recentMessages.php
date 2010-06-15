@@ -1,0 +1,19 @@
+<?php use_helper('Global') ?>
+<?php 
+  $content = "";
+  //$content .= "<ul>";
+  foreach ($messages->getResults() as $message)
+  {
+    if ($message->isNew()) { $strong_o = "<strong>"; $strong_c = "</strong>"; } else { $strong_o = ''; $strong_c = ''; }
+    $content .= "<span>".$strong_o.link_to(short_string($message->getSfGuardUserRelatedBySenderId()->getProfile().' - '.$message->getSubject(), 33), 'messages/view?message='.$message->getUuid()).$strong_c."</span><br />";
+  }
+  //$content .= "</ul>";
+
+  $panel = array();
+  $panel['id']      = 'panel-recent-messages';
+  $panel['class']   = 'panel-holder panel-size-1 float-right clear-both';
+  $panel['title']   = link_to(ucwords(__('Recent Messages')), 'messages/showUserMailbox?');
+  $panel['content'] = $content;
+
+  echo output_panel($panel);
+?>

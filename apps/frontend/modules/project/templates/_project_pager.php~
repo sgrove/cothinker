@@ -1,0 +1,38 @@
+<?php use_helper('Javascript', 'PagerNavigation')?>
+<?php if (!isset($uri_options)) { $uri_options = ''; } ?>
+
+  <?php foreach ($projects->getResults() as $project): ?>
+<div class="project-listing">
+	<?php echo image_tag('nopicture.jpg') ?>
+	<ul class="description">
+		<li class="panels" style="width:60%;">
+			<h3><?php echo link_to($project->getTitle(), 'project/show?slug='.$project->getSlug()) ?></h3>
+			<?php echo $project->getDescriptionBrief(300) ?>
+		</li>
+
+		<li class="panels" style="width:30%;">
+			<ul style="float:left;">
+				<li><?php echo __('Owner') ?>:</li>
+				<li><?php echo __('Dept') ?>:</li>
+				<li><?php echo __('Updated') ?>:</li>
+				<li><?php echo __('Status') ?>:</li>
+			</ul>
+			<ul style="float:left;">
+				<li><?php echo link_to($project->getOwner(), 'user/show?user='.urlencode($project->getOwner()->getUuid())) ?> (<?php echo ucwords(__($project->getOwner()->getTitle())) ?>)</li>
+				<li><?php echo ucwords(__($project->getDepartment())) ?></li>
+				<li>mada</li>
+				<li><?php include_partial('status', array('project' => $project)) ?></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+  <?php endforeach; ?>
+
+<div id="pager-navigation">
+  <?php echo pager_navigation_ajax($projects, 'project/ajaxProjectPager?'.$uri_options, array(
+  'update' => 'pager-holder',
+  'loading' => 'Element.show("indicator");',
+  'complete' => 'Element.hide("indicator");')) ?>
+</div>
+

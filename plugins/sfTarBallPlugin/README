@@ -1,0 +1,23 @@
+= sfTarBallPlugin - A simple pake task to package you project in a tarball =
+
+== Author ==
+
+Alon Noy, [http://www.frames4technology.nl/]
+
+== Overview ==
+
+A simple task that make the sequence of 'symfony freeze', 'tar -czf ...' and 'symfony unfreeze' all in one call.
+
+== License ==
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+== Installation ==
+
+To install the plugin use `symfony plugin-install` command
+
+== Using the plugin ==
+
+Just do 'symfony tar' and your project tarball will be created one directory level higher then your project directory root, ready to be deployed.
+

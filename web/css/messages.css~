@@ -1,0 +1,180 @@
+div#inbox
+{
+  padding: 0px;
+}
+
+div#inbox input
+{
+  border: solid 2px blue;
+}
+
+div#mail-nav
+{  
+  font-size: larger;
+  color: blue;
+}
+
+div#mail-nav h1
+{
+  color: black;
+}
+
+div#mail-nav input
+{
+  border: solid 2px blue;
+}
+
+div#mail-header-from
+{
+  width:15%;
+  padding-left: 2px;
+  padding-right: 8px;
+}
+
+div#mail-header-subject
+{
+  width:65.0%;
+  padding-left: 0px;
+}
+
+div#mail-header-date
+{
+  width:18%;
+  padding-left: 6px;
+}
+
+.mail-header-fields
+{
+  background-color:#1D40B2;
+  color: white;
+}
+
+.mail-footer-fields
+{
+  background-color:#1D40B2;
+  color: white;
+}
+
+.mail-footer-fields a
+{
+  background-color:#1D40B2;
+  color: white;
+  text-decoration: none;
+}
+
+.mail-inbox-image
+{
+  border-width: 4px 0px 4px 4px;
+  border-style: solid;
+  border-color: #F7CE26;
+  padding-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+.mail-image
+{
+  padding-top: 4px;
+  border-width: 0px 0px 4px 0px;
+  border-style: solid;
+  border-color: #F7CE26;
+  padding-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+.mail-new
+{
+  font-weight: bold;
+}
+
+div.inbox-fields-holder
+{
+  color: white;
+  font-size: small;
+}
+
+div.inbox-fields-footer
+{
+  color: white;
+  font-size: small;
+  margin-top: 5px;
+}
+
+div.mail-listing-fields
+{
+  font-size: small;
+  height: 15px;
+  padding: 3px 0px 4px 3px;
+  background-color: #ccc;
+  border-bottom: 1px solid gray;
+}
+
+div.mail-listing-fields input
+{
+  border: 2px solid blue;
+}
+
+.mail-row-0
+{
+  background-color: #E6EAEE;
+  color: #000062;
+}
+
+.mail-row-1
+{
+  background-color: #fff;
+  color: #000062;
+}
+
+.mail-from
+{
+  width: 15%;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.mail-subject
+{
+ width: 65%;
+ margin-left: 5px;
+ margin-right: 0px;
+}
+
+.mail-date
+{
+ width: 17.5%;
+ margin-left: 5px;
+ margin-right: 0px;
+}
+
+.mail-form-header-bar
+{
+  background-color: #93ABE5;
+  margin-bottom: 15px;
+}
+
+.mail-form-holder-dark
+{
+  background-color: #314a9f;
+  color: #fff;
+}
+
+.mail-form-holder-dark input, textarea
+{
+  border: 2px solid black;
+}
+
+.mail-field-holder
+{
+  padding: 0px 6px 4px;
+  margin-bottom: 4px;
+}
+
+.mail-text-field-holder
+{
+  padding: 10px;
+}
+
+.mail-field-title
+{
+  font-weight: bold;
+}

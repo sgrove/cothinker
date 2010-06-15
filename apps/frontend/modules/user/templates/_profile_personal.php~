@@ -1,0 +1,33 @@
+<?php use_helper('I18N', 'Javascript', 'sfIcon') ?>
+
+<?php use_helper('Global') ?>
+<?php 
+
+  $content = '';
+
+  $events = $sf_user->getProfile()->getHistory(5);
+  foreach ($events as $event)
+  {
+    $content .= "<span>".substr($event->getTitle().' : '.$event->getText(), 0, 33).'...</span><br />';
+  }
+
+
+  $panel = array();
+  $panel['title']   = "Recent Activity";
+  $panel['content'] = $content;
+  $panel['id']      = 'panel-user-recent-activity';
+  $panel['class']   = 'panel-holder panel-size-1 float-right clear-both';
+
+  echo output_panel($panel);
+?>
+<?php include_component('messages', 'recentMessages') ?>
+<?php include_component('home', 'didYouKnow') ?>
+
+<?php $events = $sf_user->getProfile()->getHistory(10); ?>
+
+<div>
+  <h1>News Feed</h1>
+  <?php foreach ($events as $event): ?>
+    <h3><?php echo sfIcon('info').$event->getTitle() ?></h3>
+    <span style="padding-left:10px;"><?php echo "".$event->getText() ?></span>
+  <?php endforeach ?>

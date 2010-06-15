@@ -1,0 +1,175 @@
+= sfFaqPlugin - FAQ for Symfony =
+
+== Overview ==
+
+This plugin allows you to embed a FAQ module within your symfony application with the following features :
+
+ * Questions are grouped into Categories
+ * BackEnd Modules to manage categories and questions
+ * A category can be activated or desactivated
+ * The front can be full JS (no reload) OR one click reload the page with a good URL for search engine optimization
+ * i18n ready
+
+
+== Requirements ==
+
+ * Prototype (for FULL JS version)
+
+== Installation ==
+ 
+To install the plugin for a symfony project, use the symfony command line:
+{{{
+$ php symfony plugin-install http://plugins.symfony-project.com/sfFaqPlugin-1.1.2
+}}}
+
+Alternatively, if you don't have installed PEAR, you can download the latest package attached to this plugin's wiki page and extract it under your project's `plugins/` directory. You will also have to copy the contents of the `myproject/plugins/sfFaqPlugin/web/` directory into a `myproject/web/sfFaqPlugin/` directory.
+
+Rebuild the model, generate the SQL code for the new tables and insert it into your database:
+{{{
+$ php symfony propel-build-all
+}}}
+
+Clear the cache to enable autoloading to find new classes:
+{{{
+$ php symfony cc
+}}}
+
+You can load included fixtures to start using FAQ with test data.
+{{{
+$ php symfony propel-load-data frontend plugins/sfFaqPlugin/data/fixtures
+}}}
+
+== Configuration ==
+
+=== setting.yml ===
+
+Enable the new `sfFaq` module in your application, within `settings.yml` file.
+{{{
+// in myproject/apps/frontend/config/settings.yml
+all:
+  .settings:
+    enabled_modules:        [default, sfFaq]
+
+// in myproject/apps/backend/config/settings.yml
+all:
+  .settings:
+    enabled_modules:        [default, sfFaqAdminCategories, sfFaqAdminFaq]
+}}}
+
+Start using the plugin by browsing front-end module's default page:
+{{{ 
+// FrontEnd
+http://myproject/sfFaq
+
+// BackEnd
+http://myproject/backend.php/sfFaqAdminCategories
+http://myproject/backend.php/sfFaqAdminFaq
+}}}
+
+=== app.yml ===
+
+Plugin features can be altered by configuration. To do so, add some of the following lines to your application's `app.yml`:
+
+{{{
+// in myproject/apps/frontend/config/app.yml
+all:
+  sfFaqPlugin:
+    title:                              FAQ   # default : "FAQ", Title of page
+    separator:                          '-'   # default : '|', Categories separator
+    question_separator:                 '---' # default : '<hr />', Questions separator
+
+    first_category_by_default:          true  # default : false, open the first category into load module
+    first_question_by_default:          true  # default : false, open the first question into load category
+
+    js:                                 true  # default : false, true for the FULL JS version
+    close_all_question_with_category:   true  # default : false, ONLY FOR JS VERSION, close all questions when you reload a category
+}}}
+
+=== Routing rules ===
+
+The plugin doesn't come with any routing rule. However, you can add some of your own to make the URLs look nicer. An example of set of rules could be as follows:
+
+{{{
+# FAQ ADMIN
+sf_faq_admin:
+  url:          /faqAdmin
+  param:        { module: sfFaqAdminCategories, action: index }
+  
+sf_faq_admin_categories:
+  url:          /faqAdminCategories
+  param:        { module: sfFaqAdminCategories, action: index }
+       
+sf_faq_admin_categories_edit:
+  url:          /faqAdminCategories/edit/*
+  param:        { module: sfFaqAdminCategories, action: edit }
+
+sf_faq_admin_categories_create:
+  url:          /faqAdminCategories/create/*
+  param:        { module: sfFaqAdminCategories, action: create }
+  
+sf_faq_admin_categories_delete:
+  url:          /faqAdminCategories/delete/*
+  param:        { module: sfFaqAdminCategories, action: delete }
+    
+sf_faq_admin_categories_list:
+  url:          /faqAdminCategories/list/*
+  param:        { module: sfFaqAdminCategories, action: list }
+    
+sf_faq_faq_admin:
+  url:          /faqAdminFaq
+  param:        { module: sfFaqAdminFaq, action: index }
+  
+sf_faq_faq_admin_edit:
+  url:          /faqAdminFaq/edit/*
+  param:        { module: sfFaqAdminFaq, action: edit }
+
+sf_faq_faq_admin_create:
+  url:          /faqAdminFaq/create/*
+  param:        { module: sfFaqAdminFaq, action: create }
+
+sf_faq_faq_admin_delete:
+  url:          /faqAdminFaq/delete/*
+  param:        { module: sfFaqAdminFaq, action: delete }
+
+sf_faq_faq_admin_list:
+  url:          /faqAdminFaq/list/*
+  param:        { module: sfFaqAdminFaq, action: list }
+  
+# FAQ  
+sf_faq_category:
+  url:          /faq/category/:category_id/:category_name
+  param:        { module: sfFaq, action: index }
+
+sf_faq:
+  url:          /faq/:faq_id/:question
+  param:        { module: sfFaq, action: index }
+
+sf_faq_default:
+  url:          /faq
+  param:        { module: sfFaq, action: index }
+}}}
+
+=== view.yml ===
+
+{{{
+// in myproject/apps/frontend/config/view.yml
+all:
+  stylesheets: [/sfFaqPlugin/css/sf_faq, myCustomStylesheet]
+
+  javascripts: [/sf/prototype/js/prototype, /sf/prototype/js/builder, /sf/prototype/js/effects]
+}}}
+
+== Examples ==
+
+ * [http://jonathan.demoutiez.net/sfFaq For full JS version]
+ * [http://jonathan.demoutiez.net/faq For search engine optimization]
+
+== Credits ==
+
+This plugin was developed by [http://jonathan.demoutiez.net Jonathan Demoutiez] during my job in [http://www.webpulser.com Webpulser] : a french Web application development studio settled in Lille, northen France.
+
+ * Thanks to Jordi Llonch for his contribution on the method for declaring JS's functions.
+ * Thanks to jillelaine for his comments who contribute on v1.1.
+
+	If you want to contribute, contact me.
+

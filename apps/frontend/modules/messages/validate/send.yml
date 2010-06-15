@@ -1,0 +1,15 @@
+fillin:
+  enabled: true
+
+fields:
+  user_recipient:
+    required:
+      msg:       *Who do you want us to send this message to?
+    userFullNameValidator:
+  subject:
+    required:
+      msg:      *Give us a catchy subject for your message
+  body:
+    required: no
+
+validators:

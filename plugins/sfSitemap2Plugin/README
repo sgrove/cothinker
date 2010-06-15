@@ -1,0 +1,217 @@
+= sfSitemap2 plugin =
+
+The `sfSitemap2Plugin` offers an object interface for sitemap -  output methods for displaying urls on a page and serving sitemap through a symfony application.
+
+== Possible uses ==
+
+ * serving a sitemap based on model objects
+
+== Contents ==
+
+This plugin contains three data structure classes:
+
+ * `sfSitemap`
+ * `sfSitemapItem`
+ 
+It also contains specific classes containing specific input/output methods based on specific sitemap formats:
+
+ * `sfSitemap`
+ * `sfSitemapPeer`
+
+== Installation ==
+
+  * Install the plugin
+{{{
+$ symfony plugin-install http://plugins.symfony-project.com/sfSitemap2Plugin
+}}}
+
+  * Alternatively, if you don't have PEAR installed, you can download the latest package attached to this plugin's wiki page and extract it under your project's `plugins/` directory
+
+  * Clear the cache to enable the autoloading to find the new class
+{{{
+$ symfony cc
+}}}
+
+== Tutorials ==
+
+=== Building a sitemap from an array of objects ===
+
+==== Example data ====
+
+Let's take an example of a simple blog application with a `Post` and an `Author` table:
+
+||''Post''    || ''Author''
+||id          || id
+||author_id   || first_name
+||title       || last_name
+||description || email
+||body        ||
+||created_at  ||
+
+The `Post` class is extended by a `getStrippedTitle()` method that transforms the title into a string that can be used in an URI, replacing spaces by dashes, upper case by lower case, and removing all special characters:
+
+{{{
+public function getStrippedTitle()
+{
+  $text = strtolower($this->getTitle());
+
+  // strip all non word chars
+  $text = preg_replace('/\W/', ' ', $text);
+  // replace all white space sections with a dash
+  $text = preg_replace('/\ +/', '-', $text);
+  // trim dashes
+  $text = preg_replace('/\-$/', '', $text);
+  $text = preg_replace('/^\-/', '', $text);
+
+  return $text;
+}
+}}}
+
+The `Author` class is extended by a custom `->getName()` method as follows:
+
+{{{
+public function getName()
+{
+  return $this->getFirstName().' '.$this->getLastName()
+}
+}}}
+
+If you need more details about the way to extend the model, refer to [http://www.symfony-project.com/book/trunk/08-Inside-the-Model-Layer#Extending%20the%20Model Chapter 8].
+
+The `routing.yml` contains the following rule:
+
+{{{
+post:
+    url:   /permalink/:stripped_title
+    param: { module: post, action: read }
+}}}
+
+If you need more details about the routing system, refer to [http://www.symfony-project.com/book/trunk/09-Links-and-the-Routing-System Chapter 9].
+
+A special `feed` module is built for the occasion, and all the actions and templates will be placed in it.
+
+{{{$ symfony init-module myapp sitemap}}}
+
+==== Expected result ====
+
+The sitemap action has to output an [http://www.sitemap.org/ sitemap]. As a reminder of all the information that need to be included in an sitemap, here is an example:
+
+{{{
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9  http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>http://www.myblog.com/</loc>
+  <lastMod>2005-12-11T16:23:51+00:00</lastMod>
+  <changeFreq>always</changeFreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>http://www.myblog.com/permalink/i-love-mice</loc>
+  <lastMod>2005-12-11T16:23:51+00:00</lastMod>
+  <changeFreq>monthly</changeFreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>http://www.myblog.com/permalink/a-mouse-is-better-than-a-fish</loc>
+  <lastMod>2005-12-11T16:23:51+00:00</lastMod>
+  <changeFreq>monthly</changeFreq>
+  <priority>0.5</priority>
+</url>
+</urlset>
+}}}
+
+==== Using the creators and setters ====
+
+To build the sitemap, you need to initialize it with a certain format and options, and to add url items based on the objects resulting from a database request. With the syntax of the `sfSitemap` and `sfSitemapItem` class, that would give:
+
+{{{
+public function executeAllPosts()
+{
+  $sitemap = new sfSitemapFeed();
+  $priority = '0.3';
+  $freq = 'weekly';
+
+  $posts = PostPeer::doSelect(new Criteria());
+
+  foreach ($posts as $post)
+  {
+    $item = new sfSitemapItem();
+    $item->setLoc('@permalink?stripped_title='.$post->getStrippedTitle());
+    $item->setLastMod($post->getCreatedAt('U'));
+    $item->setPriority($priority);
+    $item->setChangeFreq($freq);
+
+    $sitemap->addItem($item);
+  }
+
+  $this->sitemap = $sitemap;
+}
+}}}
+
+At the end of the action, the `$sitemap` variable contains a `sfSitemap` object which includes several `sfSitemapItem` objects. To transform the object into an actual Sitemap, the `allPostsSuccess.php` template simply contains:
+
+{{{
+<?php decorate_with(false) ?>
+<?php echo $feed->asXml() ?>
+}}}
+
+The content type is automatically set by the `asXML()` method, depending on the XML format.
+
+When called from a sitemap aggregator, the result of the action is now exactly the sitemap described above:
+
+{{{http://www.myblog.com/sitemap/allPosts}}}
+
+==== Using the `initialize()` method ====
+
+The use of all the setters for the sitemap and item construction can be a little annoying, since there is a lot of information to define. `sfSitemapItem` class provide an `initialize()` method that uses an associative array for a shorter syntax:
+
+{{{
+public function executeAllPosts()
+{
+  $sitemap = new sfSitemapFeed();
+
+  $posts = PostPeer::doSelect(new Criteria() );
+
+  $priority = '0.3';
+  $freq = 'weekly';
+
+  foreach ($posts as $post)
+  {
+    $item = new sfSitemapItem();
+    $item->initialize(array(
+      'loc'        => '@permalink?stripped_title='.$post->getStrippedTitle(),
+      'lastmod'    => $post->getCreatedAt(),
+      'changeFreq' => $freq,
+      'piority'	   => $priority
+    ));
+
+    $sitemap->addItem($item);
+  }
+
+  $this->sitemap = $sitemap;
+}
+}}}
+
+It has exactly the same effect as the previous listing, but the syntax is clearer.
+
+==== Using the sfSitemapPeer static methods ====
+
+The `sfSitemapPeer` class offer helper methods that facilitate the creation and population of sitemap items.
+
+When the sitemap format is determined at runtime, create sitemap objects using the `sfSitemapPeer::newInstance()` method, which is a factory, rather that using the `new` command:
+
+{{{
+$sitemap = sfSitemapPeer::newInstance('default');
+// same as
+$sitemap = new sfDefaultSitemap();
+}}}
+
+== TODO ==
+
+ * create class contaning Sitemap Index. 
+
+== Changelog ==
+
+=== 2007-10-21 | 0.0.1 Alpha === 
+
+ * jupeter: Initial release

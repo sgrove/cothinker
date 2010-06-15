@@ -1,0 +1,329 @@
+# support rules
+contact_form:
+  url: /support/contact_us
+  param: { module: contactform, action: index }
+
+submit_contact_form:
+  url: /support/submit_contact_form
+  param: { module: contactform, action: submit }
+
+# message rules
+show_user_outbox:
+  url: /user/messages/sent
+  param: { module: messages, action: showUserMailbox, folder: sent }
+
+compose_message:
+  url: /user/messages/compose/*
+  param: { module: messages, action: compose }
+
+show_user_mailbox:
+  url: /user/messages/:folder
+  param: { module: messages, action: showUserMailbox, folder: inbox}
+
+# sfGuard rules
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: user, action: forgotPassword }
+
+register:
+  url: /sign_up
+  param: { module: user, action: signUp }
+  
+# feed rules
+permalink:
+  url:  /newsfeeds/:landing/*.xml
+  param:  { module: feeds, action: showItem }
+
+sitemap:
+  url: /sitemap.xml
+  param: { module: feeds, action: sitemap }
+
+# projects rules
+list_projects:
+  url: /projects/list/:page
+  param: { module: project, action: list, page: 1}
+
+list_my_projects:
+  url: /projects/mine/:page
+  param: { module: project, action: myProjects, page: 1 }
+
+list_favorite_projects:
+  url: /projects/favorites/:page
+  param: { module: project, action: favorites, page: 1 }
+
+show_project_waiting_pool:
+  url: /projects/edge/:page
+  param: { module: project, action: waitingPool, page: 1 }
+
+# project rules
+show_project:
+  url: /projects/:project
+  param: { module: project, action: showMain }
+
+show_project_main:
+  url: /projects/:project/main
+  param: { module: project, action: showMain }
+
+show_project_calendar:
+  url: /projects/:project/events
+  param: { module: project, action: showEvents }
+
+show_project_team:
+  url: /projects/:project/team
+  param: { module: project, action: showTeam }
+
+show_project_tasks:
+  url: /projects/:project/tasks
+  param: { module: project, action: showTasks }
+
+show_project_wiki:
+  url: /projects/:slug/wiki
+  param: { module: nahoWiki, action: view }
+
+show_project_forums:
+  url: /projects/:project/forums
+  param: { module: forums, action: projectForumList }
+
+show_project_tools:
+  url: /projects/:project/manage_tools
+  param: { module: project, action: edit }
+
+show_project_task:
+  url: /projects/:project/tasks/view/:task
+  param: { module: project, action: showTask }
+
+edit_project:
+  url: /projects/:project/edit
+  param: { module: project, action: edit }
+
+edit_project_position:
+  url: /projects/:project/positions/:position/edit
+  param: { module: project, action: editPosition, position: new }
+
+edit_project_task:
+  url: /projects/:project/tasks/edit/:task
+  param: { module: tasks, action: edit }
+  
+delete_project_task:
+  url: /projects/:project/tasks/delete/:task
+  param: { module: tasks, action: delete }
+
+list_project_tasks:
+  url: /projects/:project/tasks/:sort_by/:direction/:page
+  param: { module: project, action: showTasks, page: 1 }
+
+create_project_instructions:
+  url: /projects/create/instructions
+  param: { module: project, action: create }
+
+create_project_step1:
+  url: /projects/create/description/:id
+  param: { module: project, action: createDescription, id: new }
+
+create_project_save_step1:
+  url: /projects/create/save/description
+  param: { module: project, action: createSaveDescription }
+
+create_project_step2:
+  url: /projects/create/details/:id
+  param: { module: project, action: createDetails }
+
+create_project_save_step2:
+  url: /projects/create/save/details
+  param: { module: project, action: createSaveDetails }
+
+create_project_step3:
+  url: /projects/create/timeline/:id
+  param: { module: project, action: createTimeline }
+
+create_project_save_step3:
+  url: /projects/create/save/timeline
+  param: { module: project, action: createSaveTimeline }
+
+create_project_submit:
+  url: /projects/create/review/:id
+  param: { module: project, action: createReview }
+
+create_project_save_submit:
+  url: /projects/create/submit/:id
+  param: { module: project, action: submitProjectApplication }
+
+create_project_preview:
+  url: /projects/create/application/preview/:id
+  param: { module: project, action: previewApplication }
+
+show_project_application:
+  url: /projects/create/application/review/:id
+  param: { module: project, action: createDescription }
+
+flag_project_application_for_help:
+  url: /projects/create/help/:id
+  param: { module: project, action: flagHelp, id: none }
+
+remove_project_application:
+  url: /projects/applications/remove/:id
+  param: { module: project, action: removeApplication }
+
+# task rules
+show_task:
+  url: /projects/:project/tasks/:task
+  param: { module: project, action: showTask }
+
+show_todo:
+  url: /personal/todo/:user/:todo
+  param: { module: user, action: showTodo }
+
+# user rules
+show_user:
+  url: /users/:user/profile
+  param: { module: user, action: showProfile }
+
+show_user_profile:
+  url: /users/:user/profile
+  param: { module: user, action: showProfile }
+
+show_user_projects:
+  url: /users/:user/projects
+  param: { module: user, action: showProjects }
+
+show_user_personal:
+  url: /users/personal
+  param: { module: user, action: showPersonal }
+
+edit_user_profile:
+  url: /users/edit_profile
+  param: { module: user, action: editProfile }
+
+list_users:
+  url: /users/list/:page
+  param: { module: user, action: list, page: 1 }
+
+mark_project_as_favorite:
+  url: /user/set_favorite/projects/:id
+  param: { module: sfStar, action: starit, model: Project }
+
+# feature rules
+show_feature:
+  url: /feature/:feature
+  param: { module: features, action: show }
+
+# wiki rules
+wiki_home:
+  url:   /:slug/wiki
+  param: { module: nahoWiki, action: index }
+
+wiki_view:
+  url:   /:slug/wiki/view/:page
+  param: { module: nahoWiki, action: view }
+
+wiki_diff:
+  url:  /:slug/wiki/diff/:page/*
+  param: { module: nahoWiki, action: diff }
+
+wiki_edit:
+  url:  /:slug/wiki/edit/:page
+  param: { module: nahoWiki, action: edit }
+
+wiki_history:
+  url:  /:slug/wiki/history/:page
+  param: { module: nahoWiki, action: history }
+
+wiki_browse:
+  url: /:slug/wiki/browse/:page
+  param: { module: nahoWiki, action: browse }
+
+wiki_diff_form:
+  url: /:slug/wiki/diff_form
+  param: { module: nahoWiki, action: diff }
+
+# graph rules
+gantt_chart:
+  url:  /charts/gantt/:project/:title.png
+  param: { module: project, action: ganttChart }
+
+# forum rules
+project_forums:
+  url: /projects/:project/forum
+  param: { module: forums, action: projectForumList }
+
+show_project_forum:
+  url: /projects/:project/forums/:forum_name
+  param: { module: forums, action: forum }
+
+create_forum_topic:
+  url: /projects/:project/forums/:forum_name/create
+  param: { module: forums, action: createTopic }
+
+list_forums_latest_topics:
+  url: /projects/:project/forums/latest_topics
+  param: { module: forums, action: latestTopics }
+
+list_forums_latest_posts:
+  url: /projects/:project/forums/latest_posts
+  param: { module: forums, action: latestPosts }
+
+list_forums_latest_posts_feed:
+  url: /projects/:project/forums/feeds/latest_posts.rss
+  param: { module: forums, action: latestPostsFeed }
+
+list_forum_latest_topics:
+  url: /projects/:project/forums/:forum_name/latest_topics
+  param: { module: forums, action: forumLatestTopics }
+
+list_forum_latest_posts:
+  url: /projects/:project/forums/:forum_name/latest_posts
+  param: { module: forums, action: forumLatestPosts }
+
+list_forum_latest_posts_feed:
+  url: /projects/:project/forums/:forum_name/feeds/latest_posts.rss
+  param: { module: forums, action: forumLatestPostsFeed }
+
+show_forum_topic:
+  url: /projects/:project/forums/:forum_name/topic/:id/:page
+  param: { module: forums, action: topic, page: 1 }
+
+show_forum_post:
+  url: /projects/:project/forums/:forum_name/post/:page/:id/*
+  param: { module: forums, action: post, page: 1 }
+
+# file rules
+download_file:
+  url: /files/download/:id
+  param: { module: files, action: download }
+
+upload_photo:
+  url: /files/photos/insert
+  param: { module: sfPhotoGallery, action: insert }
+
+create_photo:
+  url: /files/photos/upload/:entity/:entity_id
+  param: { module: sfPhotoGallery, action: create }
+
+# default rules
+homepage:
+  url:   /:culture
+  param: { module: home, action: index, culture: en_US }
+
+# default rules
+homepage:
+  url:   /
+  param: { module: home, action: index, culture: en_US }
+
+default_symfony:
+  url:   /symfony/:action/*
+  param: { module: default }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

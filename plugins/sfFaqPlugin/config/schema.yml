@@ -1,0 +1,16 @@
+propel:
+  sf_faq_category:
+    _attributes:   { phpName: sfFaqCategory, package: plugins.sfFaqPlugin.lib.model }
+    id:
+    name:          { type: varchar(255) }
+    description:   { type: longvarchar }
+    activate:      { type: boolean, default: true }
+    created_at:
+
+  sf_faq_faq:
+    _attributes:   { phpName: sfFaqFaq, package: plugins.sfFaqPlugin.lib.model }
+    id:
+    question:      { type: varchar(255) }
+    answer:        { type: longvarchar }
+    category_id:   { type: integer, foreignTable: sf_faq_category, foreignReference: id, onDelete: cascade }
+    created_at:

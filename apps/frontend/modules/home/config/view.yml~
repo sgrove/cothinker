@@ -1,0 +1,8 @@
+addSuccess:
+  has_layout:   off
+  stylesheets:  [cart]
+
+all:
+  has_layout:   on
+  stylesheets:  [cart]
+

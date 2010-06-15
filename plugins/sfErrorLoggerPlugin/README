@@ -1,0 +1,57 @@
+= sfErrorLoggerPlugin plugin =
+
+The `sfErrorLoggerPlugin` logs all your 404 and 500 errors to the database.
+
+It also provides a module `sfErrorLogViewer` to navigate through the errors.
+
+== Installation ==
+
+  * Install the plugin
+  
+    {{{
+      symfony plugin-install http://plugins.symfony-project.com/sfErrorLoggerPlugin
+    }}}
+
+  * Rebuild your model
+  
+    {{{
+      symfony propel-build-all
+    }}}
+
+  * Enable the viewer module in your `settings.yml` (optional)
+
+    {{{
+      all:
+        .settings:
+          activated_modules:      [..., sfErrorLogViewer]
+    }}}
+
+  * Clear the cache
+
+    {{{
+      symfony cc
+    }}}
+
+  * You're done.
+
+== Troubleshooting ==
+
+If you use the symfony `sync` task, be sure to check the following line in `config/rsync_exclude.txt` and change:
+
+{{{
+  log
+}}}
+
+by
+
+{{{
+  /log/*
+}}}
+
+== Changelog ==
+
+=== 2007-09-10 | 1.0.6 ===
+
+ * fabien: fixed 'delete all similar' feature
+ * fabien: changed exception_object and request to clob
+ * fabien: added a try/catch block around logger to avoid exception if the database is not properly configured
